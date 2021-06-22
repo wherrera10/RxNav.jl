@@ -1,0 +1,21 @@
+authors = ["William Herrera <wherrera@alahonua.com>"]
+name = "RxNav"
+uuid = 
+version = "0.1.0"
+
+[deps]
+HTTP =
+LightXML = 
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+Pkg = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
+Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
+
+[compat]
+julia = "1"
+HTTP = "1"
+LightXML = "1"
+
+[targets]
+test = ["Pkg", "Test"]
