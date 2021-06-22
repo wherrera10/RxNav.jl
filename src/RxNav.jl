@@ -69,6 +69,8 @@ Given a drug name or rxcui id string, return known drug interations for that dru
 If ONCHigh is true only return the ONCHigh database entries, which returns fewer
 entries, tending to list only the more significant interactions. Set ONCHigh
 to false to get all known interactions, which can be multiple and sometimes redundant.
+Return a vector of named 4-tuples consisting of (first drug, second drug,
+severity, and interation description) formeach paired drug interation.
 """
 function interaction(id; ONCHigh = true)
     if !is_in_rxcui_format(id)
@@ -102,6 +104,10 @@ end
 """
     interaction_within_list(idlist::Vector{String})
 
+Return a vector of named 4-tuples consisting of (first drug, second drug,
+severity, and interation description) formeach paired drug interation.    
+Takes as its argument a vector of drug names or rxcui identifiers for drugs for which to seek
+any drug interactions.
 """
 function interaction_within_list(idlist::Vector{String})
     for (i, id) in enumerate(idlist)
