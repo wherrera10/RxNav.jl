@@ -19,7 +19,7 @@ function getdoc(urlkey, urltail)
 end
 
 include "RxNormAPI.jl"
-
+include "RxTermsAPI.jl"
 
 
 """
