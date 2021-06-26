@@ -1,5 +1,7 @@
 #  github: part of RxNav.jl
 
+using HTTP
+
 const PRESCRIBABLE = [false]  # defaults to larger database
 
 prescribable() = PRESCRIBABLE[1]
