@@ -47,7 +47,7 @@ is_in_rxcui_format(s) = all(c -> c in "0123456789", collect(s))
 
 Return further arguments to the REST query of the form "&name=value"
 or if values is a vector, of the form "&name=val1+val2+val3"
-Starts with &, not $, so there must be a prior argument in the url string.
+Starts with &, not ?, so there must be a prior argument in the url string.
 """
 morearg(name::String, value::String) = "&$name=$(HTTP.URIs.escapeuri(value))"
 morearg(name::String, values::Vector{String}) = "&$name=" * join(values, "+")
