@@ -53,7 +53,10 @@ To set this back to using the more general database, call `prescribable(false)`.
 
 ### RxClass API
 
+<br />
+
 See <link>https://rxnav.nlm.nih.gov/RxClassAPIs.html</link>, as copied below:
+
 <br />
 
 | Function | REST Resource | Description |
@@ -75,18 +78,86 @@ getSimilarityInformation | /class/similarInfo | Similarity of the clinically-sig
 getSourcesOfDrugClassRelations | /relaSources | Sources of drug-class relations
 getSpellingSuggestions | /spellingsuggestions | Drug or class names similar to a given string
 
-
 <br />
 
 ### RxNorm API
 
+<br />
+
+See <link>https://rxnav.nlm.nih.gov/RxNormAPIs.html</link>, as copied below:
+
+<br />
+
+| Function | REST Resource | Description |
+| ---      |     ---       |   ---      |
+filterByProperty | /rxcui/rxcui/filter | Concept RXCUI if the predicate is true | Active
+findRxcuiById | /rxcui?idtype=...&id=... | Concepts associated with a specified identifier | Active or Current
+findRxcuiByString | /rxcui?name=... | Concepts with a specified name | Active or Current
+getAllConceptsByStatus | /allstatus | Concepts having a specified status | Current and Historical
+getAllConceptsByTTY | /allconcepts | Concepts having a specified term type | Active
+getAllHistoricalNDCs | /rxcui/rxcui/allhistoricalndcs | National Drug Codes (NDC) ever associated with a concept | Current and Historical
+getAllNDCs (Deprecated) | /rxcui/rxcui/allndcs | National Drug Codes (NDC) associated with a concept | Current
+getAllNDCsByStatus | /allNDCstatus | NDCs having a specified NDC status | Current and Historical
+getAllProperties | /rxcui/rxcui/allProperties | Concept details | Active
+getAllRelatedInfo | /rxcui/rxcui/allrelated | Concepts related directly or indirectly to a specified concept | Active
+getApproximateMatch | /approximateTerm | Concept and atom IDs approximately matching a query | Active or Current
+getDisplayTerms | /displaynames | Strings to support auto-completion in a user interface | Active
+getDrugs | /drugs | Drugs related to a specified name | Active
+getIdTypes | /idtypes | Identifier types | Current
+getMultiIngredBrand | /brands | Brands containing specified ingredients | Active
+getNDCProperties | /ndcproperties | National Drug Code (NDC) details | Active
+getNDCStatus | /ndcstatus | Status of a National Drug Code (NDC) | Current and Historical
+getNDCs | /rxcui/rxcui/ndcs | National Drug Codes (NDC) associated with a concept | Active
+getPropCategories | /propCategories | RxNav property categories | Active
+getPropNames | /propnames | Property names | Active
+getProprietaryInformation | /rxcui/rxcui/proprietary | Strings from sources that require a UMLS license | Current
+getRelaTypes | /relatypes | RxNorm Relationship types | Active
+getRelatedByRelationship | /rxcui/rxcui/related?rela=... | Concepts directly related to a specified concept by a specified relationship | Active
+getRelatedByType | /rxcui/rxcui/related?tty=... | Concepts of specified types that are directly or indirectly related to a specified concept | Active
+getRxConceptProperties | /rxcui/rxcui/properties | Concept name, TTY, and a synonym | Active
+getRxNormName | /rxcui/rxcui | Name of a concept | Active
+getRxNormVersion | /version | RxNorm data set and API versions | Current
+getRxProperty | /rxcui/rxcui/property | A property of a concept | Active
+getRxcuiHistoryStatus | /rxcui/rxcui/historystatus | Status, history, and other attributes of a concept | Current and Historical
+getSourceTypes | /sourcetypes | Vocabulary sources | Current
+getSpellingSuggestions | /spellingsuggestions | Strings similar to a specified string | Active
+getTermTypes | /termtypes | Term types | Active
+
+<br />
+
 ### RxTerms API
+
+<br />
+
+See <link>https://rxnav.nlm.nih.gov/RxTermsAPIs.html</link>, as copied below:
+
+<br />
+
+| Function | REST Resource | Description |
+| ---      |     ---       |   ---      |
+getAllConcepts | /allconcepts | All RxTerms concepts
+getAllRxTermInfo | /rxcui/rxcui/allinfo | RxTerms information for a specified RxNorm concept
+getRxTermDisplayName | /rxcui/rxcui/name | RxTerms display name for a specified RxNorm concept
+getRxTermsVersion | /version | RxTerms version
+
+<br />
 
 ### Drug Interaction API
 
+<br />
+
+See <link>https://rxnav.nlm.nih.gov/RxTermsAPIs.html</link>, as copied below:
 
 
+| Function | REST Resource | Description |
+| ---      |     ---       |   ---      |findDrugInteractions | /interaction | Interactions of an RxNorm drug
+findInteractionsFromList | /list | Interactions between a list of drugs
+getInteractionSources | /sources | Sources of the interactions
+getVersion | /version | Version of the data set(s)
 
+<br />
 
 ## Installation
+
+<br />
 
