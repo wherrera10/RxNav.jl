@@ -208,7 +208,7 @@ getTermTypes | /termtypes | Term types | Active
 
 <br /><br />
 
-   filterByProperty(rxcui::String, propName::String, propValues::Vector{String} = [])
+    filterByProperty(rxcui::String, propName::String, propValues::Vector{String} = [])
    
 Returns true if rxcui has the propName property (and fits optional propValues criteria if given)
 <br /><br />
@@ -218,8 +218,7 @@ Returns true if rxcui has the propName property (and fits optional propValues cr
 Get concepts associated with a specified identifier
 <br /><br />
 
-
-   findRxcuiByString(name::String, extras=[])
+    findRxcuiByString(name::String, extras=[])
 
 Get concepts with a specified name	Active or Current
 <br /><br />
@@ -234,7 +233,7 @@ Get concepts having a specified status
 Get concepts having a specified term type (tty)
 <br /><br />
 
-   getAllHistoricalNDCs()
+    getAllHistoricalNDCs()
 
 Get National Drug Codes (NDC) ever associated with a concept
 <br /><br />
