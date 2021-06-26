@@ -1,5 +1,17 @@
 #  github: part of RxNav.jl
 
+export prescribeable
+
+const PRESCRIBEABLE = [true]
+
+prescribeable() = PRESCRIBEABLE[1]
+
+""" set whether to use Prescribeable database or entire database including items no longer available """
+prescribeable(tf) = begin PRESCRIBEABLE[1] = tf end
+
+""" get the base url for RxNorm, default is the Prescribeable RxNorm set. """
+baseurl() = prescribeable() ? "prescribeable" : "baseurl"
+
 """ RESTuri is a Dict of RxNav REST urls keyed by strings. """
 const RESTuri = Dict(
     "baseurl" => "https://rxnav.nlm.nih.gov/REST/",
