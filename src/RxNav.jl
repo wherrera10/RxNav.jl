@@ -6,9 +6,9 @@ using EzXML
 export rcui, drugs, interaction, interaction_within_list
 
 include "util.jl"
-include "RxNormAPI.jl"
-include "RxTermsAPI.jl"
-include "DrugInteractionAPI.jl"
+include "API/RxNormAPI.jl"
+include "API/RxTermsAPI.jl"
+include "API/DrugInteractionAPI.jl"
 
 """
     rcui(name)
