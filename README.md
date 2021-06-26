@@ -59,7 +59,7 @@ you should consult the NLM documentation (links are below). If the function take
 called `extra`, this means that the function's optional argument `extra` should be provided as a `Dict`
 or as a `Vector` of `Pairs`, with the keys to the Dict being the label for the optional term and the
 values for that key as either a string or a vector of strings to be assigned to that value in the
-final URL request. For example, `extras = Dict("sources" => ["ACTIVE", "OBSOLETE"], "toReturn" => 25)`
+final URL request. For example, `extra = Dict("sources" => ["ACTIVE", "OBSOLETE"], "toReturn" => 25)`
 would be translated to `"&sources=ACTIVE+OBSOLETE&toReturn=25"` in the REST call request string sent by HTTP.
 
 <br /><br />
