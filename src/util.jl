@@ -1,6 +1,6 @@
 #  github: part of RxNav.jl
 
-using ExXML
+using EzXML
 using HTTP
 
 const PRESCRIBABLE = [false]  # defaults to larger database
