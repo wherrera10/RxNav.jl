@@ -1,7 +1,7 @@
-using HTTP
-using EzXML
-
 module RxNav
+
+using EzXML
+using HTTP
 
 export rcui, drugs, interaction, interaction_within_list, prescribeable
 
