@@ -18,11 +18,11 @@ Take a name of an NDC drug, return its rxcui as String.
 function rcui(name)
     try
         doc = getdoc("rcui", HTTP.URIs.escapeuri(name))
-        idstring = nodecontent(first(findall("//idGroup/rxnormId", doc)))
+        idstring = nodecontent(findfirst("//idGroup/rxnormId", doc))
         return idstring
-    catch
-        @warn("HTTP query of $name to RxNav rcui database failed.")
-        return -1
+    catch y
+        @warn y
+        return ""
     end
 end
 
