@@ -420,9 +420,37 @@ findInteractionsFromList | /list | Interactions between a list of drugs
 getInteractionSources | /sources | Sources of the interactions
 getVersion | /version | Version of the data set(s)
 
+<br /><br />
+
+    findDrugInteractions(rxcui::String, extras = [])
+
+Get interactions of an RxNorm drug with other items in the RxNorm database.
+<br /><br />
+
+    findInteractionsFromList(rxcuis::Vector{String}, extras = [])
+    
+Get pairwise interactions between items in a list of drugs
+<br /><br />
+
+    getInteractionSources()
+    
+Get sources of the interactions
+<br /><br />
+
+    getVersion()
+    
+Get version of the data set(s)
+<br /><br />
+
 <br />
 
 ## Installation
 
 <br />
 
+You may install the package from Github in the usual way, or to install the current master copy:
+    
+    using Pkg
+    Pkg.add("http://github.com/wherrera10/RxNav.jl")
+    
+<br />
