@@ -53,6 +53,30 @@ To set this back to using the more general database, call `prescribable(false)`.
 
 ### RxClass API
 
+See <link>https://rxnav.nlm.nih.gov/RxClassAPIs.html</link>, as copied below:
+
+
+Function | REST Resource | |Description
+ ---              ---          ---
+findClassByName | /class/byName | Drug classes with a specified class name
+findClassesById | /class/byId | Drug classes with a specified class identifier
+findSimilarClassesByClass | /class/similar | Classes with similar clinically-significant RxNorm ingredients
+findSimilarClassesByDrugList | /class/similarByRxcuis | Classes with clinically-significant RxNorm ingredients similar to a specified list
+getAllClasses | /allClasses | All classes (may limit by class type)
+getClassByRxNormDrugId | /class/byRxcui | Classes containing a specified drug RXCUI
+getClassByRxNormDrugName | /class/byDrugName | Classes containing a drug of the specified name
+getClassContexts | /classContext | Paths from the specified class to the root of its class hierarchies
+getClassGraphBySource | /classGraph | Classes along the path from a specified class to the root of a class hierarchy
+getClassMembers | /classMembers | Drug members of a specified class
+getClassTree | /classTree | Subclasses or descendants of the specified class
+getClassTypes | /classTypes | Class types
+getRelas | /relas | Relationships expressed by a source of drug relations
+getSimilarityInformation | /class/similarInfo | Similarity of the clinically-significant membership of two classes
+getSourcesOfDrugClassRelations | /relaSources | Sources of drug-class relations
+getSpellingSuggestions | /spellingsuggestions | Drug or class names similar to a given string
+
+
+
 ### RxNorm API
 
 ### RxTerms API
