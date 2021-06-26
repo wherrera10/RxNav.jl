@@ -50,7 +50,7 @@ or if values is a vector, of the form "&name=val1+val2+val3"
 Starts with &, not $, so there must be a prior argument in the url string.
 """
 morearg(name::String, value::String) = "&$name=$(HTTP.URIs.escapeuri(value))"
-moreqarg(name::String, values::Vector{String}) = "&$name=" * join(values, "+")
+morearg(name::String, values::Vector{String}) = "&$name=" * join(values, "+")
 
 """
     morearg(pairs)
