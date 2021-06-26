@@ -13,24 +13,9 @@ const RESTuri = Dict(
     "interactionlist" => "https://rxnav.nlm.nih.gov/REST/interaction/list?rxcuis=",
 )
 
-function getdoc(urlkey, urltail)
-    req = HTTP.request("GET", RESTuri[urlkey] * urltail)
-    return root(parseXML(String(req.body)))
-end
-
+include "util.jl"
 include "RxNormAPI.jl"
 include "RxTermsAPI.jl"
-
-
-"""
-    is_in_rxcui_format(s)
-
-Tests whether the string is in the format for an RxNav rxcui identifier.
-Currently rxcui identifiers are composed of only digits 0 through 9,
-though there is nothing in the schema that says these must be only digits.
-If that changes in future RxNav updates, the parsing here may also change.
-"""
-is_in_rxcui_format(s) = all(c -> c in "0123456789", collect(s))
 
 """
     rcui(name)
