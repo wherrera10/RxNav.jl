@@ -441,11 +441,13 @@ getVersion | /version | Version of the data set(s)
     findDrugInteractions(rxcui::String, extras = [])
 
 Get interactions of an RxNorm drug with other items in the RxNorm database.
+returns a `Vector` of `NamedTuple`s as in (drug1, drug2, severity, description)
 <br /><br />
 
     findInteractionsFromList(rxcuis::Vector{String}, extras = [])
     
 Get pairwise interactions between items in a list of drugs
+returns a `Vector` of `NamedTuple`s as in (drug1, drug2, severity, description)
 <br /><br />
 
     getInteractionSources()
