@@ -45,7 +45,7 @@ mutual interactions this will be reported for example as A with B, A with C, B w
 ## API functions
 
 Note: There are two different RxNorm databases.  The more complete one, RxNorm, contains
-medications including vetinary-use-only medications and medications no longer in use or
+medications including vetinerary-use-only medications and medications no longer in use or
 which are not available in United States pharmacies. The Julia functions default to this
 database. In order to confine search results to generally available human medications,
 the RxNorm database also supports the "Prescribable" RxNorm API, which gives results only
