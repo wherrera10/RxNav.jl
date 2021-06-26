@@ -43,11 +43,11 @@ which are not available in United States pharmacies. The Julia functions default
 database. In order to confine search results to generally available human medications,
 the RxNorm database also supports the "Prescribable" API, which gives results only within
 medications currently available for medical presciption in the US. If you want the
-"Prescibeable" database used for your RxNorm API calls, you should first call the function 
+"Prescribable" database used for your RxNorm API calls, you should first call the function 
 <br /><br />
     prescribable(true)
 <br /><br />
-after which all calls to the RxNorm API will use the somewhat smaller Prescribeable database.
+after which all calls to the RxNorm API will use the somewhat smaller Prescribable database.
 (To set this back to using the more general database, call `prescribable(false)` ).
 <br /><br /><br />
 
