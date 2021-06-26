@@ -150,7 +150,8 @@ See <link>https://rxnav.nlm.nih.gov/RxTermsAPIs.html</link>, as copied below:
 
 
 | Function | REST Resource | Description |
-| ---      |     ---       |   ---      |findDrugInteractions | /interaction | Interactions of an RxNorm drug
+| ---      |     ---       |   ---      |
+findDrugInteractions | /interaction | Interactions of an RxNorm drug
 findInteractionsFromList | /list | Interactions between a list of drugs
 getInteractionSources | /sources | Sources of the interactions
 getVersion | /version | Version of the data set(s)
