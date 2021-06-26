@@ -412,6 +412,7 @@ Get RxTerms version
 
 See <link>https://rxnav.nlm.nih.gov/RxTermsAPIs.html</link>, as copied below:
 
+<br />
 
 | Function | REST Resource | Description |
 | ---      |     ---       |   ---      |
