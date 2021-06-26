@@ -83,83 +83,85 @@ getSpellingSuggestions | /spellingsuggestions | Drug or class names similar to a
     findClassByName(classname::String, types::Vector{String} = String[])
 
 Get drug classes with a specified class name
-<br />
+<br /><br />
 
     findClassesById(classid::String)
 
 Get drug classes with a specified class identifier
-<br />
+<br /><br />
 
     findSimilarClassesByClass(classid::String, relasource::String, extra=[])
     
 Get classes with similar clinically-significant RxNorm ingredients
-<br />
+<br /><br />
 
     findSimilarClassesByDrugList(rxcuis::Vector{String}, extra=[])
 
 Get classes with clinically-significant RxNorm ingredients similar to a specified list
-<br />
+<br /><br />
 
     getAllClasses(classtypes::Vector{String}=String[])
 
 Get all classes (may limit by class type with optional argument)
-<br />
+<br /><br />
 
     getClassByRxNormDrugId(rxcui::String, extras = [])
 
 Get classes containing a specified drug RXCUI
-<br />
+<br /><br />
 
     getClassByRxNormDrugName(drugname::String, extras = [])
 
 Get classes containing a drug of the specified name
-<br />
+<br /><br />
 
     getClassContexts(classid::String)
     
 Get name and type context for paths from the specified class to the root of its class hierarchies
-<br />
+<br /><br />
 
     getClassGraphBySource(classId, source="")
     
 Get classes along the path from a specified class to the root of a class hierarchy
-<br />
+<br /><br />
+
 
     getClassMembers(classid::String, source::String="")
     
 Get drug members of a specified class
-<br />
+<br /><br />
 
     getClassTree(classid::String, type="")
     
 Get subclasses or descendants of the specified class
-<br />
+<br /><br />
 
     getClassTypes()
 
 Get class types
-<br />
+<br /><br />
 
     getRelas()
     
 Get relationships expressed by a source of drug relations
-<br />
+<br /><br />
 
     getSimilarityInformation(id1, source1, id2, source2, extras=[])
 
 Get similarity of the clinically-significant membership of two classes by id and source
-<br />
+<br /><br />
 
     getSourcesOfDrugClassRelations()
     
 Get sources of drug-class relations
-<br />
+<br /><br />
 
     getSpellingSuggestions(term::String, type="")
 
 Get drug or class names similar to a given string
-
 <br /><br />
+
+<br />
 
 ### RxNorm API
 
