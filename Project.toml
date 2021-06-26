@@ -1,6 +1,6 @@
 authors = ["William Herrera <wherrera@alahonua.com>"]
 name = "RxNav"
-uuid = 
+uuid = "204b4f30-d656-11eb-06dc-3b971f9bbb52"
 version = "0.1.0"
 
 [deps]
