@@ -1,3 +1,12 @@
+""" RESTuri is a Dict of RxNav REST urls keyed by strings. """
+const RESTuri = Dict(
+    "baseurl" => "https://rxnav.nlm.nih.gov/REST/",
+    "rcui" => "https://rxnav.nlm.nih.gov/REST/rxcui?name=",
+    "drugs" => "https://rxnav.nlm.nih.gov/REST/drugs?name=",
+    "interaction" => "https://rxnav.nlm.nih.gov/REST/interaction/interaction?rxcui=",
+    "interactionlist" => "https://rxnav.nlm.nih.gov/REST/interaction/list?rxcuis=",
+)
+
 """
     getdoc(urlkey, urltail)
 
