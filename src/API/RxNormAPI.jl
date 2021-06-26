@@ -24,7 +24,7 @@ function findRxcuiById(idtype::String, id::String, allsrc = 0)
     argstring = "rxcui?idtype=$idtype&id=$id&allsrc=$allsrc"
     try
         doc = getdoc(baseurl(), argstring)
-        rxn = findall("//idGroup/rxnormId", doc))
+        rxn = findall("//idGroup/rxnormId", doc)
         return nodecontent.(rxn)
     catch y
         @warn y
