@@ -1,19 +1,19 @@
 #  github: part of RxNav.jl
 
-const PRESCRIBEABLE = [false]  # defaults to larger database
+const PRESCRIBABLE = [false]  # defaults to larger database
 
-prescribeable() = PRESCRIBEABLE[1]
+prescribable() = PRESCRIBABLE[1]
 
-""" set whether to use Prescribeable database or entire database including items no longer available """
-prescribeable(tf) = begin PRESCRIBEABLE[1] = tf end
+""" set whether to use Prescribeable RxNorm database or entire database including items no longer available """
+prescribable(tf) = begin PRESCRIBABLE[1] = tf end
 
-""" get the base url for RxNorm, default is the Prescribeable RxNorm set. """
-baseurl() = prescribeable() ? "prescribeable" : "baseurl"
+""" get the base url for RxNorm, default is the Prescribable RxNorm set. """
+baseurl() = prescribable() ? "prescribable" : "baseurl"
 
 """ RESTuri is a Dict of RxNav REST urls keyed by strings. """
 const RESTuri = Dict(
     "baseurl" => "https://rxnav.nlm.nih.gov/REST/",
-    "prescribeable" => "https://rxnav.nlm.nih.gov/REST/Prescribe/",
+    "prescribable" => "https://rxnav.nlm.nih.gov/REST/Prescribe/",
     "rcui" => "https://rxnav.nlm.nih.gov/REST/rxcui?name=",
     "drugs" => "https://rxnav.nlm.nih.gov/REST/drugs?name=",
     "interaction" => "https://rxnav.nlm.nih.gov/REST/interaction/interaction?rxcui=",
