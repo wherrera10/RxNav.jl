@@ -4,45 +4,55 @@
     findDrugInteractions
 
 /interaction	Interactions of an RxNorm drug
+returns a Vector of NamedTuples
 """
 function findDrugInteractions(rxcui::String, extras = [])
     argstring = "interaction/interaction?rxcui=$rxcui" * isempty(extras) ? "" : morearg(extras)
-    concepts = NamedTuple[]
+    interactions = NamedTuple[]
     try
         doc = getdoc("baseurl", argstring)
-        rxn = findall("//interactionTypeGroup/interactionType/minConceptItem")
+        rxn = findall("//interactionTypeGroup/fullInteractionType/interactionPair")
         for x in rxn
-            erxcui = nodecontent(findfirst("rxcui", x))
-            ename = nodecontent(findfirst("name", x))
-            push!(concepts, (rxcui = erxcui, name = ename))
+            sev = nodecontent(findfirst("severity", p))
+            desc = nodecontent(findfirst("description", p))
+            namepair = findall("interactionConcept/minConceptItem/name", p)
+            if !isempty(namepair)
+                enames = nodecontent.(namepair)
+                push!(interactions, (drug1 = enames[1], drug2 = enames[2], severity = sev, description = desc))
+            end
         end
     catch y
         @warn y
     end
-    return concepts
+    return interactions
 end
 
 """
     findInteractionsFromList
 
 /list	Interactions between a list of drugs
+returns a Vector of NamedTuples
 """
 function findInteractionsFromList(rxcuis::Vector{String}, extras = [])
     argstring = "interaction/list?rxcuis=" * join(rxcuis, "+") *
         isempty(extras) ? "" : morearg(extras)
-    concepts = NamedTuple[]
+    interactions = NamedTuple[]
     try
         doc = getdoc("baseurl", argstring)
-        rxn = findall("//interactionTypeGroup/fullInteractionType/interactionPair/interactionConcept/minConceptItem")
+        rxn = findall("//interactionTypeGroup/fullInteractionType/interactionPair")
         for x in rxn
-            erxcui = nodecontent(findfirst("rxcui", x))
-            ename = nodecontent(findfirst("name", x))
-            push!(concepts, (rxcui = erxcui, name = ename))
+            sev = nodecontent(findfirst("severity", p))
+            desc = nodecontent(findfirst("description", p))
+            namepair = findall("interactionConcept/minConceptItem/name", p)
+            if !isempty(namepair)
+                enames = nodecontent.(namepair)
+                push!(interactions, (drug1 = enames[1], drug2 = enames[2], severity = sev, description = desc))
+            end
         end
     catch y
         @warn y
     end
-    return concepts
+    return interactions
 end
 
 """
