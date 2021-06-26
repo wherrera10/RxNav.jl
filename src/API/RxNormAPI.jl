@@ -9,7 +9,7 @@ function filterByProperty(rxcui::String, propName::String, propValues::Vector{St
     argstring *= isempty(propValues) ? "" : "&propValues=" * join(propValues, "+")
     s = ""
     try
-        s = string(getdoc(baseurl(), argstring)
+        s = string(getdoc(baseurl(), argstring))
     catch y
         @warn y
     end
