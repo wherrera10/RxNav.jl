@@ -54,9 +54,9 @@ To set this back to using the more general database, call `prescribable(false)`.
 ### RxClass API
 
 See <link>https://rxnav.nlm.nih.gov/RxClassAPIs.html</link>, as copied below:
+<br />
 
-
-Function | REST Resource | |Description
+Function | REST Resource | Description
  ---              ---          ---
 findClassByName | /class/byName | Drug classes with a specified class name
 findClassesById | /class/byId | Drug classes with a specified class identifier
@@ -75,7 +75,7 @@ getSimilarityInformation | /class/similarInfo | Similarity of the clinically-sig
 getSourcesOfDrugClassRelations | /relaSources | Sources of drug-class relations
 getSpellingSuggestions | /spellingsuggestions | Drug or class names similar to a given string
 
-
+<br />
 
 ### RxNorm API
 
