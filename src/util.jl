@@ -1,7 +1,5 @@
 #  github: part of RxNav.jl
 
-export prescribeable
-
 const PRESCRIBEABLE = [true]
 
 prescribeable() = PRESCRIBEABLE[1]
