@@ -48,7 +48,7 @@ within medications currently available for medical presciption in the US. If you
     prescribable(true)
 <br /><br />
 after which all calls to the RxNorm API will use the somewhat smaller Prescribable database.
-(To set this back to using the more general database, call `prescribable(false)` ).
+To set this back to using the more general database, call `prescribable(false)`.
 <br /><br /><br />
 
 ### RxClass API
