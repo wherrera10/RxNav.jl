@@ -1,3 +1,5 @@
+#  github: part of RxNav.jl
+
 """ RESTuri is a Dict of RxNav REST urls keyed by strings. """
 const RESTuri = Dict(
     "baseurl" => "https://rxnav.nlm.nih.gov/REST/",
