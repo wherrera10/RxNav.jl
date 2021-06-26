@@ -5,14 +5,6 @@ using EzXML
 
 export rcui, drugs, interaction, interaction_within_list
 
-const RESTuri = Dict(
-    "baseurl" => "https://rxnav.nlm.nih.gov/REST/",
-    "rcui" => "https://rxnav.nlm.nih.gov/REST/rxcui?name=",
-    "drugs" => "https://rxnav.nlm.nih.gov/REST/drugs?name=",
-    "interaction" => "https://rxnav.nlm.nih.gov/REST/interaction/interaction?rxcui=",
-    "interactionlist" => "https://rxnav.nlm.nih.gov/REST/interaction/list?rxcuis=",
-)
-
 include "util.jl"
 include "RxNormAPI.jl"
 include "RxTermsAPI.jl"
