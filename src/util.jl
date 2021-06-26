@@ -29,7 +29,7 @@ get the document found by the string formed by: (the key indexed by urlkey) * (t
 """
 function getdoc(urlkey, urltail)
     req = HTTP.request("GET", RESTuri[urlkey] * urltail)
-    return root(parseXML(String(req.body)))
+    return root(String(req.body))
 end
 
 """
