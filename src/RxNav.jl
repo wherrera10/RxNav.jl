@@ -76,7 +76,10 @@ end
 
 """
     interaction_within_list(idlist::Vector{String})
-
+    
+Given a list of drug names or rxcui id strings, return known drug interations for 
+that combination of drugs. Results are organized pairwise, so if A, B, and C have
+mutual interactions this will be reported for example as A with B, A with C, B with C.
 """
 function interaction_within_list(idlist::Vector{String})
     for (i, id) in enumerate(idlist)
