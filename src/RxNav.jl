@@ -56,13 +56,13 @@ function interaction(id; ONCHigh = true)
     end
     interactions = NamedTuple[]
     try
-        tail = HTTP.URIs.escapeuri(id) * ONCHigh ? "&sources=ONCHigh" : ""
+        tail = HTTP.URIs.escapeuri(id) * (ONCHigh ? "&sources=ONCHigh" : "")
         doc = getdoc("interaction", tail)
         pairs = findall("//interactionTypeGroup/interactionType/interactionPair", doc)
         for p in pairs
             sev = nodecontent(findfirst("severity", p))
             desc = nodecontent(findfirst("description", p))
-            enames = findall("iterationConcept/minconceptItem/name", p)
+            enames = findall("iterationConcept/minConceptItem/name", p)
             if !isempty(enames)
                 names = nodecontent.(enames)
                 push!(interactions, (drug1=names[1], drug2=names[2], severity=sev, description=desc))
@@ -95,7 +95,7 @@ function interaction_within_list(idlist::Vector{String})
         for p in pairs
             sev = nodecontent(findfirst("severity", p))
             desc = nodecontent(findfirst("description", p))
-            enames = findall("iterationConcept/minconceptItem/name", p)
+            enames = findall("iterationConcept/minConceptItem/name", p)
             if !isempty(enames)
                 names = nodecontent.(enames)
                 push!(interactions, (drug1=names[1], drug2=names[2], severity=sev, description=desc))
