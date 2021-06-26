@@ -1,6 +1,6 @@
 #  github: part of RxNav.jl
 
-const PRESCRIBEABLE = [true]
+const PRESCRIBEABLE = [false]  # defaults to larger database
 
 prescribeable() = PRESCRIBEABLE[1]
 
