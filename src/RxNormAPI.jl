@@ -1,17 +1,20 @@
+#  github: part of RxNav.jl
+
 """
    filterByProperty
 
 /rxcui/rxcui/filter	Concept RXCUI if the predicate is true	Active
 """
-function filterByProperty(rxcui::String, propName::String, propValues::Vector{String})
-    argstring = isempty(filter) ? "$rxcui/filter.xml?propName=$propName" :
-        "$rxcui/filter.xml?propName=$propName&propValues=" * join(propValues, "+")
+function filterByProperty(rxcui::String, propName::String, propValues::Vector{String} = [])
+    argstring = "$rxcui/filter?propName=$propName"
+    argstring *= isempty(propValues) ? "" : "&propValues=" * join(propValues, "+")
+    s = ""
     try
-        doc = getdoc("baseurl", argstring)
+        s = string(getdoc("baseurl", argstring))       
     catch y
         @warn y
     end
-    return contains(rxcui, string(doc)) ? true : false
+    return contains(rxcui, s)
 end
 
 """
@@ -20,10 +23,11 @@ end
 /rxcui?idtype=...&id=...	Concepts associated with a specified identifier	Active or Current
 """
 function findRxcuiById(idtype::String, id::String, allsrc = 0)
-    argstring = "rxcui.xml?idtype=$idtype&id=$id&allsrc=$allsrc"
+    argstring = "rxcui?idtype=$idtype&id=$id&allsrc=$allsrc"
     try
         doc = getdoc("baseurl", argstring)
-        return nodecontent(findfirst("//idGroup/rxnormid", doc))
+        rxn = findall("//idGroup/rxnormId", doc))
+        return nodecontent.(rxn)
     catch y
         @warn y
         return String[]
@@ -35,11 +39,12 @@ end
 
 /rxcui?name=...	Concepts with a specified name	Active or Current
 """
-function findRxcuiByString(name::String, searchtype=1)
-    argstring = "rxcui.xml?name=" * HTTP.URIs.escapeuri(name) * "&search=" * searchtype
+function findRxcuiByString(name::String, extras=[])
+    argstring = "rxcui?name=" * HTTP.URIs.escapeuri(name)
+    argstring *= isempty(extras) ? "" : morearg(extras)
     try
         doc = getdoc("baseurl", argstring)
-        return nodecontent(findfirst("//idGroup/rxnormid", doc))
+        return nodecontent(findfirst("//idGroup/rxnormId", doc))
     catch y
         @warn y
         return String[]
@@ -51,7 +56,7 @@ end
 
 /allstatus	Concepts having a specified status	Current and Historical
 """
-function getAllConceptsByStatus(status::String)
+function getAllConceptsByStatus(status = "ALL)
     argstring = "allstatus?status=$status"
     concepts = NamedTuple[]
     try
@@ -78,7 +83,7 @@ function getAllConceptsByTTY(tty::Vector{String})
     concepts = NamedTuple[]
     try
         doc = getdoc("baseurl", argstring)
-        rxn = findall("//minConceptGroup/minConcept")
+        rxn = findall("//rxnormdata/minConceptGroup/minConcept")
         for x in rxn
             erxcui = nodecontent(findfirst("rxcui", x))
             ename = nodecontent(findfirst("name", x))
@@ -118,7 +123,7 @@ end
 
 /allNDCstatus	NDCs having a specified NDC status	Current and Historical
 """
-function getAllNDCsByStatus(status)
+function getAllNDCsByStatus(status = "ALL")
     argstring = "allNDCstatus?status=$status"
     ndclist = String[]
     try
@@ -137,7 +142,7 @@ end
 
 /rxcui/rxcui/allProperties	Concept details	Active
 """
-function getAllProperties(rxcui, properties)
+function getAllProperties(rxcui, properties = ["ALL"])
     argstring = "rxcui/" * rxcui * "/allProperties?prop=" * join(properties, "+")
     query = RESTuri["baseurl"] * argstring
     concepts = NamedTuple[]
@@ -184,9 +189,8 @@ end
 
 /approximateTerm	Concept and atom IDs approximately matching a query	Active or Current
 """
-function getApproximateMatch(term::String, maxentries = 20, option = 0)
-    argstring = "approximateTerm?term=" * HTTP.URIs.escapeuri(term) *
-        "option=$option&maxEntries=" * maxentries
+function getApproximateMatch(term::String, extras = [])
+    argstring = "approximateTerm?term=" * HTTP.URIs.escapeuri(term) * isempty(extras) ? "" : morearg(extras)
     concepts = NamedTuple[]
     try
         doc = getdoc("baseurl", argstring)
@@ -314,8 +318,8 @@ end
 
 /ndcstatus	Status of a National Drug Code (NDC)	Current and Historical
 """
-function getNDCStatus(ndc::String)
-    argstring = "ndcstatus?ndc=" * HTTP.URIs.escapeuri(ndc)
+function getNDCStatus(ndc::String, extras = [])
+    argstring = "ndcstatus?ndc=" * HTTP.URIs.escapeuri(ndc) * isempty(extras) ? "" : morearg(extras)
     concepts = NamedTuple[]
     try
         doc = getdoc("baseurl", argstring)
@@ -398,9 +402,8 @@ end
 
 /rxcui/rxcui/proprietary	Strings from sources that require a UMLS license	Current
 """
-function getProprietaryInformation(rxcui::String, ticket::String, src::Vector{String}, rxaui::String="")
-    argstring = "rxcui/" * rxcui * "/proprietary.xml?srclist=" * join(src, "+") *
-        "&ticket=" * ticket * isempty(rxaui) ? "" : "&rxaui=$rxaui"
+function getProprietaryInformation(rxcui::String, ticket::String, extras = [])
+    argstring = "rxcui/" * rxcui * "/proprietary.xml?ticket=$ticket" * isempty(extras) ? "" : morearg(extras)
     concepts = NamedTuple[]
     try
         doc = getdoc("baseurl", argstring)
