@@ -381,6 +381,29 @@ getAllRxTermInfo | /rxcui/rxcui/allinfo | RxTerms information for a specified Rx
 getRxTermDisplayName | /rxcui/rxcui/name | RxTerms display name for a specified RxNorm concept
 getRxTermsVersion | /version | RxTerms version
 
+<br /><br />
+
+    getAllConcepts()
+
+Get all RxTerms concepts
+<br /><br />
+
+    getAllRxTermInfo(rxcui::String)
+
+Get RxTerms information for a specified RxNorm concept
+Returns the (quite variable) properties data in XML form.
+<br /><br />
+
+    getRxTermDisplayName(rxcui::String)
+
+Get	RxTerms display name for a specified RxNorm concept
+<br /><br />
+
+    getRxTermsVersion()
+
+Get RxTerms version
+<br /><br />
+
 <br />
 
 ### Drug Interaction API
