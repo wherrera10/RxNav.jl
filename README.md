@@ -206,6 +206,165 @@ getSourceTypes | /sourcetypes | Vocabulary sources | Current
 getSpellingSuggestions | /spellingsuggestions | Strings similar to a specified string | Active
 getTermTypes | /termtypes | Term types | Active
 
+<br /><br />
+
+   filterByProperty(rxcui::String, propName::String, propValues::Vector{String} = [])
+   
+Returns true if rxcui has the propName property (and fits optional propValues criteria if given)
+<br /><br />
+
+    findRxcuiById(idtype::String, id::String, allsrc = 0)
+    
+Get concepts associated with a specified identifier
+<br /><br />
+
+
+   findRxcuiByString(name::String, extras=[])
+
+Get concepts with a specified name	Active or Current
+<br /><br />
+
+    getAllConceptsByStatus(status = "ALL")
+
+Get concepts having a specified status
+<br /><br />
+
+    getAllConceptsByTTY(tty::Vector{String})
+
+Get concepts having a specified term type (tty)
+<br /><br />
+
+   getAllHistoricalNDCs()
+
+Get National Drug Codes (NDC) ever associated with a concept
+<br /><br />
+
+    getAllNDCsByStatus(status = "ALL")
+
+NDCs having a specified NDC status
+<br /><br />
+
+    getAllProperties(rxcui, properties = ["ALL"])
+
+Get concept details
+<br /><br />
+
+    getAllRelatedInfo(rxcui::String)
+
+Get concepts related directly or indirectly to a specified concept (rxcui)
+<br /><br />
+
+    getApproximateMatch(term::String, extras = [])
+
+Get concept and atom IDs approximately matching a query
+<br /><br />
+
+    getDisplayTerms()
+
+Get strings to support auto-completion, as used in a user interface
+<br /><br />
+
+    getDrugs(name::String)
+
+Get drugs related to a specified name
+<br /><br />
+
+    getIdTypes()
+
+Get identifier types
+<br /><br />
+
+    getMultiIngredBrand(ingredientids::Vector{String})
+
+Get brands containing specified ingredients
+<br /><br />
+
+    getNDCProperties(value::String)
+
+Get National Drug Code (NDC) details
+<br /><br />
+
+    getNDCStatus(ndc::String, extras = [])
+
+Get status of a National Drug Code (NDC)
+<br /><br />
+
+    getNDCs(rxcui::String)
+
+Get National Drug Codes (NDC) associated with a concept
+<br /><br />
+
+    getPropCategories()
+
+Get RxNav property categories
+<br /><br />
+
+    getPropNames()
+
+Get property names
+<br /><br />
+
+    getProprietaryInformation(rxcui::String, ticket::String, extras = [])
+
+Get strings from sources that require a UMLS license
+<br /><br />
+
+    getRelaTypes()
+
+Get RxNorm Relationship types
+<br /><br />
+
+    getRelatedByRelationship(rxcui::String, relata::Vector{String})
+
+Get concepts directly related to a specified concept by a specified relationship
+<br /><br />
+
+    getRelatedByType(rxcui::String, ttys::Vector{String})
+
+Get concepts of specified types that are directly or indirectly related to a specified concept
+<br /><br />
+
+    getRxConceptProperties(rxcui::String)
+
+Get concept name, TTY, and a synonym
+<br /><br />
+
+    getRxNormName(rxcui::String)
+
+Get name of a concept
+<br /><br />
+
+    getRxNormVersion()
+
+Get	RxNorm data set and API versions
+<br /><br />
+
+    getRxProperty(rxcui::String, propname::String)
+
+Get a property of a concept
+<br /><br />
+
+    getRxcuiHistoryStatus(rxcui::String)
+
+Get XML for status, history, and other attributes of a concept
+Note: as the XML content labels vary, this function returns the metadata in XML form.
+<br /><br />
+
+    getSourceTypes()
+
+Get vocabulary sources
+<br /><br />
+
+    getSpellingSuggestions(phrase::String)
+
+Get strings similar to a specified string
+<br /><br />
+
+    getTermTypes()
+
+Get term types
+<br /><br />
+
 <br />
 
 ### RxTerms API
