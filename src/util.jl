@@ -56,7 +56,7 @@ morearg(name::String, values::Vector{String}) = "&$name=" * join(values, "+")
     morearg(pairs)
 
 Return further arguments to the REST query of the form "&name=value&name2=value2",
-etc, where pairs is a vector of [name, value] pairs. Starts with &, not $,
+etc, where pairs is a vector of [name, value] pairs. Starts with &, not ?,
 so there must be a prior argument in the url string.
 """
 morearg(pairs::Vector) = reduce(*, morearg(a[1], a[2]) for a in pairs)
