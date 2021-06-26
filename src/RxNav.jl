@@ -36,8 +36,8 @@ function drugs(name)
         doc = getdoc("drugs", HTTP.URIs.escapeuri(name))
         nameelements = findall("//drugGroup/conceptGroup/conceptProperties/name", doc)
         return nodecontent.(nameelements)
-    catch
-        @warn("HTTP query of $name to RxNav drugs database failed.")
+    catch y
+        @warn y
         return String[]
     end
 end
@@ -68,8 +68,8 @@ function interaction(id; ONCHigh = true)
                 push!(interactions, (drug1=names[1], drug2=names[2], severity=sev, description=desc))
             end
         end
-    catch
-        @warn("HTTP query of $id to RxNav drug interaction database failed.")
+    catch y
+        @warn y
     end
     return interactions
 end
@@ -101,8 +101,8 @@ function interaction_within_list(idlist::Vector{String})
                 push!(interactions, (drug1=names[1], drug2=names[2], severity=sev, description=desc))
             end
         end
-    catch
-        @warn("HTTP query of $idlist to RxNav drug interaction database failed.")
+        catch y
+        @warn y
     end
     return interactions
 end
