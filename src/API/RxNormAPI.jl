@@ -9,7 +9,7 @@ function filterByProperty(rxcui::String, propName::String, propValues::Vector{St
     argstring *= isempty(propValues) ? "" : "&propValues=" * join(propValues, "+")
     s = ""
     try
-        s = string(getdoc(baseurl(), argstring))
+        s = string(getdoc(baseurl(), argstring)
     catch y
         @warn y
     end
@@ -52,7 +52,7 @@ end
     getAllConceptsByStatus
 /allstatus	Concepts having a specified status	Current and Historical
 """
-function getAllConceptsByStatus(status = "ALL)
+function getAllConceptsByStatus(status = "ALL")
     argstring = "allstatus?status=$status"
     concepts = NamedTuple[]
     try
