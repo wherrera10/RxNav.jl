@@ -8,6 +8,7 @@ export rcui, drugs, interaction, interaction_within_list
 include "util.jl"
 include "RxNormAPI.jl"
 include "RxTermsAPI.jl"
+include "DrugInteractionAPI.jl"
 
 """
     rcui(name)
