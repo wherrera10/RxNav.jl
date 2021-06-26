@@ -14,26 +14,29 @@ identifier as argument.
     rcui(name)
 
 Take a name of an NDC drug, return its rxcui as String.
-<br /><br /><br />
+<br /><br />
 
     drugs(name)
 
 Given a drug name, return a list of all available dosing forms of the drug.
-<br /><br /><br />
+<br /><br />
 
     interaction(id; ONCHigh = true)
+    
 Given a drug name or rxcui id string, return known drug interations for that drug.
 If ONCHigh is true only return the ONCHigh database entries, which returns fewer
 entries, tending to list only the more significant interactions. Set ONCHigh
 to false to get all known interactions, which can be multiple and sometimes redundant.
-<br /><br /><br />
+<br /><br />
 
     interaction_within_list(idlist::Vector{String})
 
 Given a list of drug names or rxcui id strings, return known drug interations for 
 that combination of drugs. Results are organized pairwise, so if A, B, and C have
 mutual interactions this will be reported for example as A with B, A with C, B with C.
-<br /><br /><br />
+<br /><br />
+
+<br />
 
 ## API functions
 
@@ -49,7 +52,19 @@ within medications currently available for medical presciption in the US. If you
 <br /><br />
 after which all calls to the RxNorm API will use the somewhat smaller Prescribable database.
 To set this back to using the more general database, call `prescribable(false)`.
-<br /><br /><br />
+<br /><br />
+
+Some of the API functions take optional arguments. For details of the values for such arguments 
+you should consult the NLM documentation (links are below). If the function takes an optional argument
+called `extra`, this means that the function's optional argument `extra` should be provided as a `Dict`
+or as a `Vector` of `Pairs`, with the keys to the Dict being the label for the optional term and the
+values for that key as either a string or a vector of strings to be assigned to that value in the
+final URL request. For example, `extras = Dict("sources" => ["ACTIVE", "OBSOLETE"], "toReturn" => 25)`
+would be translated to `"&sources=ACTIVE+OBSOLETE&toReturn=25"` in the REST call request string sent by HTTP.
+
+<br /><br />
+
+<br />
 
 ### RxClass API
 
