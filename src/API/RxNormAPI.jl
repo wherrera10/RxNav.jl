@@ -68,6 +68,7 @@ function getAllConceptsByStatus(status = "ALL)
     end
     return concepts
 end
+
 """
     getAllConceptsByTTY
 
@@ -89,6 +90,7 @@ function getAllConceptsByTTY(tty::Vector{String})
     end
     return concepts
 end
+
 """
    getAllHistoricalNDCs
 
@@ -111,6 +113,7 @@ function getAllHistoricalNDCs()
     end
     return times
 end
+
 """
     getAllNDCsByStatus
 
@@ -129,6 +132,7 @@ function getAllNDCsByStatus(status = "ALL")
     end
     return ndclist
 end
+
 """
     getAllProperties
 
@@ -152,6 +156,7 @@ function getAllProperties(rxcui, properties = ["ALL"])
     end
     return concepts
 end
+
 """
     getAllRelatedInfo
 
@@ -173,6 +178,7 @@ function getAllRelatedInfo(rxcui::String)
     end
     return concepts
 end
+
 """
     getApproximateMatch
 
@@ -194,6 +200,7 @@ function getApproximateMatch(term::String, extras = [])
     end
     return concepts
 end
+
 """
     getDisplayTerms
 
@@ -212,6 +219,7 @@ function getDisplayTerms()
     end
     return terms
 end
+
 """
     getDrugs
 
@@ -233,6 +241,7 @@ function getDrugs(name::String)
     end
     return concepts
 end
+
 """
     getIdTypes
 
@@ -251,6 +260,7 @@ function getIdTypes()
     end
     return idnames
 end
+
 """
     getMultiIngredBrand
 
@@ -272,6 +282,7 @@ function getMultiIngredBrand(ingredientids::Vector{String})
     end
     return concepts
 end
+
 """
     getNDCProperties
 
@@ -293,6 +304,7 @@ function getNDCProperties(value::String)
     end
     return concepts
 end
+
 """
     getNDCStatus
 
@@ -316,6 +328,7 @@ function getNDCStatus(ndc::String, extras = [])
     end
     return concepts
 end
+
 """
 getNDCs
 
@@ -335,6 +348,7 @@ function getNDCs(rxcui::String)
     end
     return ndcs
 end
+
 """
     getPropCategories
 
@@ -353,6 +367,7 @@ function getPropCategories()
     end
     return propcategories
 end
+
 """
     getPropNames
 
@@ -371,6 +386,7 @@ function getPropNames()
     end
     return propnames
 end
+
 """
     getProprietaryInformation
 
@@ -392,6 +408,7 @@ function getProprietaryInformation(rxcui::String, ticket::String, extras = [])
     end
     return concepts
 end
+
 """
     getRelaTypes
 
@@ -410,6 +427,7 @@ function getRelaTypes()
     end
     return relas
 end
+
 """
     getRelatedByRelationship
 
@@ -431,6 +449,7 @@ function getRelatedByRelationship(rxcui::String, relata::Vector{String})
     end
     return concepts
 end
+
 """
     getRelatedByType
 
@@ -452,6 +471,7 @@ function getRelatedByType(rxcui::String, ttys::Vector{String})
     end
     return concepts
 end
+
 """
     getRxConceptProperties
 
@@ -472,6 +492,7 @@ function getRxConceptProperties(rxcui::String)
     end
     return (not_found = rxcui)
 end
+
 """
     getRxNormName
 
@@ -489,6 +510,7 @@ function getRxNormName(rxcui::String)
         return NamedTuple()
     end
 end
+
 """
     getRxNormVersion
 
@@ -506,6 +528,7 @@ function getRxNormVersion()
         return NamedTuple()
     end
 end
+
 """
     getRxProperty
 
@@ -526,6 +549,7 @@ function getRxProperty(rxcui::String, propname::String)
         return NamedTuple()
     end
 end
+
 """
     getRxcuiHistoryStatus
 
@@ -543,6 +567,7 @@ function getRxcuiHistoryStatus(rxcui::String)
         return ""
     end
 end
+
 """
     getSourceTypes
 
@@ -561,6 +586,7 @@ function getSourceTypes()
     end
     return sourcetypes
 end
+
 """
     getSpellingSuggestions
 
@@ -580,6 +606,7 @@ function getSpellingSuggestions(phrase::String)
     end
     return suggestions
 end
+
 """
     getTermTypes
 
