@@ -15,17 +15,17 @@ identifier as argument.
 
 <br /><br />
 
-    rcui(name)
+####    rcui(name)
 
 Take a name of an NDC drug, return its rxcui as String.
 <br /><br />
 
-    drugs(name)
+####    drugs(name)
 
 Given a drug name, return a list of all available dosing forms of the drug.
 <br /><br />
 
-    interaction(id; ONCHigh = true)
+####    interaction(id; ONCHigh = true)
     
 Given a drug name or rxcui id string, return known drug interations for that drug.
 If ONCHigh is true only return the ONCHigh database entries, which returns fewer
@@ -34,7 +34,7 @@ to false to get all known interactions, which can be multiple and sometimes redu
 Returns a `Vector` of `NamedTuple`s as in (drug1, drug2, severity, description).
 <br /><br />
 
-    interaction_within_list(idlist::Vector{String})
+####    interaction_within_list(idlist::Vector{String})
 
 Given a list of drug names or rxcui id strings, return known drug interations for 
 that combination of drugs. Results are organized pairwise, so if A, B, and C have
@@ -104,83 +104,83 @@ getSpellingSuggestions | /spellingsuggestions | Drug or class names similar to a
 
 <br /><br />
 
-    findClassByName(classname::String, types::Vector{String} = String[])
+####    findClassByName(classname::String, types::Vector{String} = String[])
 
 Get drug classes with a specified class name
 <br /><br />
 
-    findClassesById(classid::String)
+####    findClassesById(classid::String)
 
 Get drug classes with a specified class identifier
 <br /><br />
 
-    findSimilarClassesByClass(classid::String, relasource::String, extra=[])
+####    findSimilarClassesByClass(classid::String, relasource::String, extra=[])
     
 Get classes with similar clinically-significant RxNorm ingredients
 <br /><br />
 
-    findSimilarClassesByDrugList(rxcuis::Vector{String}, extra=[])
+####    findSimilarClassesByDrugList(rxcuis::Vector{String}, extra=[])
 
 Get classes with clinically-significant RxNorm ingredients similar to a specified list
 <br /><br />
 
-    getAllClasses(classtypes::Vector{String}=String[])
+####    getAllClasses(classtypes::Vector{String}=String[])
 
 Get all classes (may limit by class type with optional argument)
 <br /><br />
 
-    getClassByRxNormDrugId(rxcui::String, extras = [])
+####    getClassByRxNormDrugId(rxcui::String, extras = [])
 
 Get classes containing a specified drug RXCUI
 <br /><br />
 
-    getClassByRxNormDrugName(drugname::String, extras = [])
+####    getClassByRxNormDrugName(drugname::String, extras = [])
 
 Get classes containing a drug of the specified name
 <br /><br />
 
-    getClassContexts(classid::String)
+####    getClassContexts(classid::String)
     
 Get name and type context for paths from the specified class to the root of its class hierarchies
 <br /><br />
 
-    getClassGraphBySource(classId, source="")
+####    getClassGraphBySource(classId, source="")
     
 Get classes along the path from a specified class to the root of a class hierarchy
 <br /><br />
 
 
-    getClassMembers(classid::String, source::String="")
+####    getClassMembers(classid::String, source::String="")
     
 Get drug members of a specified class
 <br /><br />
 
-    getClassTree(classid::String, type="")
+####    getClassTree(classid::String, type="")
     
 Get subclasses or descendants of the specified class
 <br /><br />
 
-    getClassTypes()
+####    getClassTypes()
 
 Get class types
 <br /><br />
 
-    getRelas()
+####    getRelas()
     
 Get relationships expressed by a source of drug relations
 <br /><br />
 
-    getSimilarityInformation(id1, source1, id2, source2, extras=[])
+####    getSimilarityInformation(id1, source1, id2, source2, extras=[])
 
 Get similarity of the clinically-significant membership of two classes by id and source
 <br /><br />
 
-    getSourcesOfDrugClassRelations()
+####    getSourcesOfDrugClassRelations()
     
 Get sources of drug-class relations
 <br /><br />
 
-    getSpellingSuggestions(term::String, type="")
+####    getSpellingSuggestions(term::String, type="")
 
 Get drug or class names similar to a given string
 <br /><br />
@@ -232,158 +232,158 @@ getTermTypes | /termtypes | Term types | Active
 
 <br /><br />
 
-    filterByProperty(rxcui::String, propName::String, propValues::Vector{String} = [])
+####    filterByProperty(rxcui::String, propName::String, propValues::Vector{String} = [])
    
 Returns true if rxcui has the propName property (and fits optional propValues criteria if given)
 <br /><br />
 
-    findRxcuiById(idtype::String, id::String, allsrc = 0)
+####    findRxcuiById(idtype::String, id::String, allsrc = 0)
     
 Get concepts associated with a specified identifier
 <br /><br />
 
-    findRxcuiByString(name::String, extras=[])
+####    findRxcuiByString(name::String, extras=[])
 
 Get concepts with a specified name	Active or Current
 <br /><br />
 
-    getAllConceptsByStatus(status = "ALL")
+####    getAllConceptsByStatus(status = "ALL")
 
 Get concepts having a specified status
 <br /><br />
 
-    getAllConceptsByTTY(tty::Vector{String})
+####    getAllConceptsByTTY(tty::Vector{String})
 
 Get concepts having a specified term type (tty)
 <br /><br />
 
-    getAllHistoricalNDCs()
+####    getAllHistoricalNDCs()
 
 Get National Drug Codes (NDC) ever associated with a concept
 <br /><br />
 
-    getAllNDCsByStatus(status = "ALL")
+####    getAllNDCsByStatus(status = "ALL")
 
 NDCs having a specified NDC status
 <br /><br />
 
-    getAllProperties(rxcui, properties = ["ALL"])
+####    getAllProperties(rxcui, properties = ["ALL"])
 
 Get concept details
 <br /><br />
 
-    getAllRelatedInfo(rxcui::String)
+####    getAllRelatedInfo(rxcui::String)
 
 Get concepts related directly or indirectly to a specified concept (rxcui)
 <br /><br />
 
-    getApproximateMatch(term::String, extras = [])
+####    getApproximateMatch(term::String, extras = [])
 
 Get concept and atom IDs approximately matching a query
 <br /><br />
 
-    getDisplayTerms()
+####    getDisplayTerms()
 
 Get strings to support auto-completion, as used in a user interface
 <br /><br />
 
-    getDrugs(name::String)
+####    getDrugs(name::String)
 
 Get drugs related to a specified name
 <br /><br />
 
-    getIdTypes()
+####    getIdTypes()
 
 Get identifier types
 <br /><br />
 
-    getMultiIngredBrand(ingredientids::Vector{String})
+####    getMultiIngredBrand(ingredientids::Vector{String})
 
 Get brands containing specified ingredients
 <br /><br />
 
-    getNDCProperties(value::String)
+####    getNDCProperties(value::String)
 
 Get National Drug Code (NDC) details
 <br /><br />
 
-    getNDCStatus(ndc::String, extras = [])
+####    getNDCStatus(ndc::String, extras = [])
 
 Get status of a National Drug Code (NDC)
 <br /><br />
 
-    getNDCs(rxcui::String)
+####    getNDCs(rxcui::String)
 
 Get National Drug Codes (NDC) associated with a concept
 <br /><br />
 
-    getPropCategories()
+####    getPropCategories()
 
 Get RxNav property categories
 <br /><br />
 
-    getPropNames()
+####    getPropNames()
 
 Get property names
 <br /><br />
 
-    getProprietaryInformation(rxcui::String, ticket::String, extras = [])
+####    getProprietaryInformation(rxcui::String, ticket::String, extras = [])
 
 Get strings from sources that require a UMLS license
 <br /><br />
 
-    getRelaTypes()
+####    getRelaTypes()
 
 Get RxNorm Relationship types
 <br /><br />
 
-    getRelatedByRelationship(rxcui::String, relata::Vector{String})
+####    getRelatedByRelationship(rxcui::String, relata::Vector{String})
 
 Get concepts directly related to a specified concept by a specified relationship
 <br /><br />
 
-    getRelatedByType(rxcui::String, ttys::Vector{String})
+####    getRelatedByType(rxcui::String, ttys::Vector{String})
 
 Get concepts of specified types that are directly or indirectly related to a specified concept
 <br /><br />
 
-    getRxConceptProperties(rxcui::String)
+####    getRxConceptProperties(rxcui::String)
 
 Get concept name, TTY, and a synonym
 <br /><br />
 
-    getRxNormName(rxcui::String)
+####    getRxNormName(rxcui::String)
 
 Get name of a concept
 <br /><br />
 
-    getRxNormVersion()
+####    getRxNormVersion()
 
 Get	RxNorm data set and API versions
 <br /><br />
 
-    getRxProperty(rxcui::String, propname::String)
+####    getRxProperty(rxcui::String, propname::String)
 
 Get a property of a concept
 <br /><br />
 
-    getRxcuiHistoryStatus(rxcui::String)
+####    getRxcuiHistoryStatus(rxcui::String)
 
 Get XML for status, history, and other attributes of a concept.<br />
 Note: as the XML content labels vary, this function returns the metadata in XML form.
 <br /><br />
 
-    getSourceTypes()
+####    getSourceTypes()
 
 Get vocabulary sources
 <br /><br />
 
-    getSpellingSuggestions(phrase::String)
+####    getSpellingSuggestions(phrase::String)
 
 Get strings similar to a specified string
 <br /><br />
 
-    getTermTypes()
+####    getTermTypes()
 
 Get term types
 <br /><br />
@@ -407,23 +407,23 @@ getRxTermsVersion | /version | RxTerms version
 
 <br /><br />
 
-    getAllConcepts()
+####    getAllConcepts()
 
 Get all RxTerms concepts
 <br /><br />
 
-    getAllRxTermInfo(rxcui::String)
+####    getAllRxTermInfo(rxcui::String)
 
 Get RxTerms information for a specified RxNorm concept.<br />
 Returns the (quite variable) properties data in XML form.
 <br /><br />
 
-    getRxTermDisplayName(rxcui::String)
+####    getRxTermDisplayName(rxcui::String)
 
 Get	RxTerms display name for a specified RxNorm concept
 <br /><br />
 
-    getRxTermsVersion()
+####    getRxTermsVersion()
 
 Get RxTerms version
 <br /><br />
@@ -447,24 +447,24 @@ getVersion | /version | Version of the data set(s)
 
 <br /><br />
 
-    findDrugInteractions(rxcui::String, extras = [])
+####    findDrugInteractions(rxcui::String, extras = [])
 
 Get interactions of an RxNorm drug with other items in the RxNorm database.
 Returns a `Vector` of `NamedTuple`s as in (drug1, drug2, severity, description)
 <br /><br />
 
-    findInteractionsFromList(rxcuis::Vector{String}, extras = [])
+####    findInteractionsFromList(rxcuis::Vector{String}, extras = [])
     
 Get pairwise interactions between items in a list of drugs.
 Returns a `Vector` of `NamedTuple`s as in (drug1, drug2, severity, description)
 <br /><br />
 
-    getInteractionSources()
+####    getInteractionSources()
     
 Get sources of the interactions
 <br /><br />
 
-    getVersion()
+####    getVersion()
     
 Get version of the data set(s)
 <br /><br />
