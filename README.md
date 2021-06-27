@@ -68,6 +68,9 @@ values for that key as either a string or a vector of strings to be assigned to 
 final URL request. For example, `extra = Dict("sources" => ["ACTIVE", "OBSOLETE"], "toReturn" => 25)`
 would be translated to `"&sources=ACTIVE+OBSOLETE&toReturn=25"` in the REST call request string sent by HTTP.
 
+The list of API functions is extensive. The API function names are not exported from RxNav, so to call,
+for example, `getSpellingSuggestions("asprin")` you must call this as `RxNav.getSpellingSuggestions("asprin")`.
+
 <br /><br />
 
 <br />
