@@ -51,7 +51,7 @@ medications including veterinary-use-only medications and medications no longer 
 which are not available in United States pharmacies. The Julia functions default to this
 database. In order to confine search results to generally available human medications,
 the RxNorm database also supports the "Prescribable" RxNorm API, which gives results only
-within medications currently available for medical presciption in the US. If you want the
+within medications currently available for medical prescription in the US. If you want the
 "Prescribable" database used for your RxNorm API calls, you should first call the function 
 <br /><br />
     prescribable(true)
