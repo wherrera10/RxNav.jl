@@ -31,6 +31,7 @@ Given a drug name or rxcui id string, return known drug interations for that dru
 If ONCHigh is true only return the ONCHigh database entries, which returns fewer
 entries, tending to list only the more significant interactions. Set ONCHigh
 to false to get all known interactions, which can be multiple and sometimes redundant.
+Returns a `Vector` of `NamedTuple`s as in (drug1, drug2, severity, description).
 <br /><br />
 
     interaction_within_list(idlist::Vector{String})
@@ -38,6 +39,7 @@ to false to get all known interactions, which can be multiple and sometimes redu
 Given a list of drug names or rxcui id strings, return known drug interations for 
 that combination of drugs. Results are organized pairwise, so if A, B, and C have
 mutual interactions this will be reported for example as A with B, A with C, B with C.
+Returns a `Vector` of `NamedTuple`s as in (drug1, drug2, severity, description)
 <br /><br />
 
 <br />
@@ -445,13 +447,13 @@ getVersion | /version | Version of the data set(s)
     findDrugInteractions(rxcui::String, extras = [])
 
 Get interactions of an RxNorm drug with other items in the RxNorm database.
-returns a `Vector` of `NamedTuple`s as in (drug1, drug2, severity, description)
+Returns a `Vector` of `NamedTuple`s as in (drug1, drug2, severity, description)
 <br /><br />
 
     findInteractionsFromList(rxcuis::Vector{String}, extras = [])
     
-Get pairwise interactions between items in a list of drugs
-returns a `Vector` of `NamedTuple`s as in (drug1, drug2, severity, description)
+Get pairwise interactions between items in a list of drugs.
+Returns a `Vector` of `NamedTuple`s as in (drug1, drug2, severity, description)
 <br /><br />
 
     getInteractionSources()
