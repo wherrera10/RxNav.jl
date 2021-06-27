@@ -369,7 +369,7 @@ Get a property of a concept
 
     getRxcuiHistoryStatus(rxcui::String)
 
-Get XML for status, history, and other attributes of a concept
+Get XML for status, history, and other attributes of a concept.<br />
 Note: as the XML content labels vary, this function returns the metadata in XML form.
 <br /><br />
 
@@ -414,7 +414,7 @@ Get all RxTerms concepts
 
     getAllRxTermInfo(rxcui::String)
 
-Get RxTerms information for a specified RxNorm concept
+Get RxTerms information for a specified RxNorm concept.<br />
 Returns the (quite variable) properties data in XML form.
 <br /><br />
 
