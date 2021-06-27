@@ -1,7 +1,7 @@
 authors = ["William Herrera <wherrera@alahonua.com>"]
 name = "RxNav"
 uuid = "204b4f30-d656-11eb-06dc-3b971f9bbb52"
-version = "0.1.0"
+version = "0.1.1"
 
 [deps]
 HTTP = "cd3eb016-35fb-5094-929b-558a96fad6f3"
