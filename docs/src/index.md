@@ -7,6 +7,24 @@ Julia interface to the National Library of Medicine's online pharmaceutical RxNa
 
 <img src="https://github.com/wherrera10/RxNav.jl/blob/main/docs/src/RXNavLogo.png">
 
+## Examples
+
+<br />
+    
+    julia> using RxNav
+    
+    julia> for i in interact("fentanyl", "selegiline")
+               if i.severity == "high"
+                   println(i.description)
+               end
+           end
+    Narcotic analgesics - monoamine oxidase (MAO) inhibitors
+    
+    julia> println(RxNav.getSpellingSuggestions("nortriptelene"))
+    ["nortriptyline", "Nortriptylina"]
+    
+<br /><br />
+
 ## General Use Functions
 
 These functions are derived from the API, but are specialized and have been modified
