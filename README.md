@@ -23,6 +23,12 @@ Julia interface to the National Library of Medicine's online pharmaceutical RxNa
     julia> println(RxNav.getSpellingSuggestions("nortriptelene"))
     ["nortriptyline", "Nortriptylina"]
     
+    julia> RxNav.prescribable(true)
+    true
+    
+    julia> println(RxNav.getSpellingSuggestions("nortriptelene"))
+    ["nortriptyline"]
+    
     julia> interact("1191", "warfarin", "vitamin K")
     3-element Vector{NamedTuple}:
      (drug1 = "aspirin", drug2 = "vitamin K", severity = "N/A", description = "Acetylsalicylic acid may decrease the excretion rate of Phylloquinone which could result in a higher serum level.")
