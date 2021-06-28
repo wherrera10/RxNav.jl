@@ -43,6 +43,17 @@ function drugs(name)
 end
 
 """
+    interactinteract(list::Vector)
+    interact(s1::String, severeonly::Bool=true)
+    interact(s1::String, s2::String, args...)
+
+Get a list of interactions for a single drug (or rxcui drug id) or pairwise interactions for more than one drug (or rxcuid).
+"""
+interact(list::Vector) = interaction_within_list(list)
+interact(s1::String, severeonly::Bool=true) = interaction(s1; ONCHigh=severeonly)
+interact(s1::String, s2::String, args...) = interact([[s1, s2]; [x for x in args]])
+
+"""
     interaction(id; ONCHigh = true)
 
 Given a drug name or rxcui id string, return known drug interations for that drug.
