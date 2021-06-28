@@ -25,7 +25,7 @@ Take a name of an NDC drug, return its rxcui as String.
 Given a drug name, return a list of all available dosing forms of the drug.
 <br /><br />
 
-####    interactinteract(list::Vector)
+####    interact(list::Vector)
 ####    interact(s1::String, severeonly::Bool=true)
 ####    interact(s1::String, s2::String, args...)
 
