@@ -25,6 +25,13 @@ Take a name of an NDC drug, return its rxcui as String.
 Given a drug name, return a list of all available dosing forms of the drug.
 <br /><br />
 
+####    interact(list::Vector)
+####    interact(s1::String, severeonly::Bool=true)
+####    interact(s1::String, s2::String, args...)
+
+Get a list of interactions for a single drug (or rxcui drug id) or pairwise interactions for more than one drug (or rxcuid).
+<br /><br />
+
 ####    interaction(id; ONCHigh = true)
     
 Given a drug name or rxcui id string, return known drug interations for that drug.
