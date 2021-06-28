@@ -7,7 +7,7 @@ prescribable() = PRESCRIBABLE[1]
 """ set whether to use Prescribeable RxNorm database or entire database including items no longer available """
 prescribable(tf) = begin PRESCRIBABLE[1] = tf end
 
-""" get the base url for RxNorm, default is the Prescribable RxNorm set. """
+""" get the base url for RxNorm, default at loading is the full RxNorm set, not the Prescribable RxNorm set. """
 baseurl() = prescribable() ? "prescribable" : "baseurl"
 
 """ RESTuri is a Dict of RxNav REST urls keyed by strings. """
