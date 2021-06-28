@@ -6,6 +6,7 @@ using HTTP
 export rcui, drugs, interaction, interaction_within_list, prescribable, interact
 
 include("util.jl")
+include("API/RxClassAPI.jl")
 include("API/RxNormAPI.jl")
 include("API/RxTermsAPI.jl")
 include("API/DrugInteractionAPI.jl")
