@@ -3,7 +3,7 @@ module RxNav
 using EzXML
 using HTTP
 
-export rcui, drugs, interaction, interaction_within_list, prescribeable
+export rcui, drugs, interaction, interaction_within_list, prescribeable, interact
 
 include("util.jl")
 include("API/RxNormAPI.jl")
