@@ -49,7 +49,7 @@ end
 
 Get a list of interactions for a single drug (or rxcui drug id) or pairwise interactions for more than one drug (or rxcuid).
 """
-interact(list::Vector) = interaction_within_list(list)
+interact(list::Vector) = if length(list) > 1 interaction_within_list(list); else interact(first(list)) end
 interact(s1::String, severeonly::Bool=true) = interaction(s1; ONCHigh=severeonly)
 interact(s1::String, s2::String, args...) = interact([[s1, s2]; [x for x in args]])
 
