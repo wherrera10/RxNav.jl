@@ -12,3 +12,8 @@ using Test
 @test contains(last(interaction_within_list(["207106", "656659"])).description, "metabolism")
 
 @test last(interaction_within_list(["divalproex", "lamotrigine"])).severity == "N/A" 
+
+prescribable(true)
+RxNav.getSpellingSuggestions("nortriptelene") == ["nortriptyline"]
+prescribable(false)
+RxNav.getSpellingSuggestions("nortriptelene") == ["nortriptyline", "Nortriptylina"]
