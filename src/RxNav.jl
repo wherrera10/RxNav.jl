@@ -44,7 +44,7 @@ function drugs(name)
 end
 
 """
-    interactinteract(list::Vector)
+    interact(list::Vector)
     interact(s1::String, severeonly::Bool=true)
     interact(s1::String, s2::String, args...)
 
