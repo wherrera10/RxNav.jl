@@ -37,14 +37,14 @@ Julia interface to the National Library of Medicine's online pharmaceutical RxNa
 ## General Use Functions
 
 These functions are derived from the API, but are specialized and have been modified
-for ease of use. For example, the functions may take either a drug name or an NDC
+for ease of use. For example, the functions may take either a drug name or an RxCUI
 identifier as argument.
 
 <br /><br />
 
 ####    rcui(name)
 
-Take a name of an NDC drug, return its rxcui as String.
+Take a name of a drug as String argument, return its RxCUI as String.
 <br /><br />
 
 ####    drugs(name)
