@@ -53,7 +53,7 @@ identifier as argument.
 
 ####    rcui(name)
 
-Take a name of an NDC drug, return its RxCUI as String.
+Take a name of a drug as String argument, return its RxCUI as String.
 <br /><br />
 
 ####    drugs(name)
