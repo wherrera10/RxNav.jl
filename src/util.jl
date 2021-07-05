@@ -58,4 +58,4 @@ etc, where pairs is a vector of [name, value] pairs. Starts with &, not ?,
 so there must be a prior argument in the url string.
 """
 morearg(pairs::Vector) = reduce(*, morearg(a[1], a[2]) for a in pairs)
-morearg(d::Dict) = query(collect(d))
+morearg(d::Dict) = morearg(collect(d))
