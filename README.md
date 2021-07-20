@@ -1,5 +1,6 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/cfw6pe03rfn9qsoo?svg=true)](https://ci.appveyor.com/project/wherrera10/RxNav.jl)
 [![Build Status](https://travis-ci.com/wherrera10/RxNav.jl.svg?branch=main)](https://travis-ci.com/wherrera10/RxNav.jl)
+[![CI](https://github.com/wherrera10/RxNav.jl/actions/workflows/CI.yml/badge.svg)](https://github.com/wherrera10/RxNav.jl/actions/workflows/CI.yml)
 
 # RxNav.jl
 
