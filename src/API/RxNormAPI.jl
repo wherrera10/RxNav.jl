@@ -587,21 +587,6 @@ function getSourceTypes()
     return sourcetypes
 end
 
-function getSpellingSuggestions(phrase::String)
-    argstring = "spellingsuggestions?name=" * HTTP.URIs.escapeuri(phrase)
-    suggestions = String[]
-    try
-        doc = getdoc(baseurl(), argstring)
-        rxn = findall("//suggestionGroup/suggestionList/suggestion", doc)
-        for x in rxn
-            push!(suggestions, nodecontent(x))
-        end
-    catch y
-        @warn y
-    end
-    return suggestions
-end
-
 """
     getTermTypes
 
