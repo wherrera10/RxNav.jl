@@ -2,23 +2,17 @@
 
 Julia interface to the National Library of Medicine's online pharmaceutical RxNav API
 
-<img src="https://github.com/wherrera10/RxNav.jl/blob/main/docs/src/assts/RXNavLogo.png">
+<img src="https://github.com/wherrera10/RxNav.jl/blob/main/docs/src/assets/RXNavLogo.png">
 
 ## Installation
-
-<br />
 
 You may install the package from Github in the usual way, or to install the current master copy:
     
     using Pkg
     Pkg.add("http://github.com/wherrera10/RxNav.jl")
     
-<br />
-
 
 ## Examples
-
-<br />
     
     julia> using RxNav
     
@@ -45,7 +39,6 @@ You may install the package from Github in the usual way, or to install the curr
     
 
 ## Functions Reference
-This block automatically extracts docstrings from your source code:
 
 ```@index
 ```
