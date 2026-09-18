@@ -51,5 +51,5 @@ This block automatically extracts docstrings from your source code:
 ```
 
 ```@autodocs
-Modules = [ThreadSafeDicts]
+Modules = [RxNav]
 ```
