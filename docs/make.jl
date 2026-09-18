@@ -6,10 +6,10 @@ makedocs(;
     modules=[RxNav],
     authors="William Herrera",
     sitename="RxNav.jl Documentation",
-    repo=Documenter.Remotes.GitHub("wherrera10", "RxNav.jl"),
+    repo="https://github.com/wherrera10/RxNav.jl/blob/{commit}{path}#{line}",
     format=Documenter.HTML(;
         canonical="https://wherrera10.github.io/RxNav.jl",
-        edit_link="master",
+        edit_link="main",
         assets=String[],
     ),
     pages=[
@@ -20,7 +20,7 @@ makedocs(;
 
 deploydocs(;
     repo="github.com/wherrera10/RxNav.jl.git",
-    devbranch="master",
+    devbranch="main",
 )
 
   
