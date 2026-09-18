@@ -587,11 +587,6 @@ function getSourceTypes()
     return sourcetypes
 end
 
-"""
-    getSpellingSuggestions
-
-/spellingsuggestions	Strings similar to a specified string	Active
-"""
 function getSpellingSuggestions(phrase::String)
     argstring = "spellingsuggestions?name=" * HTTP.URIs.escapeuri(phrase)
     suggestions = String[]
