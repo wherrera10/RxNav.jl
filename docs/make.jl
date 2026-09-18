@@ -20,7 +20,7 @@ makedocs(;
 
 deploydocs(;
     repo="github.com/wherrera10/RxNav.jl.git",
-    devbranch="master",
+    devbranch="main",
 )
 
   
