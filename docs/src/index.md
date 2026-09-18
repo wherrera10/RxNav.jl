@@ -40,7 +40,7 @@ You may install the package from Github in the usual way, or to install the curr
     Pkg.add("http://github.com/wherrera10/RxNav.jl")
     
 ## Functions Reference
-This block automatically extracts docstrings from your source code:
+See also the National Library of Medicine'a API page at https://lhncbc.nlm.nih.gov/RxNav/APIs/RxNormAPIs.html.
 
 ```@index
 ```
