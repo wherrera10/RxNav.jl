@@ -1,4 +1,26 @@
 using Documenter, RxNav
 
-makedocs(sitename = "RxNav Module Documentation", format = Documenter.HTML(prettyurls = false))
+DocMeta.setdocmeta!(RxNav, :DocTestSetup, :(using RxNav); recursive=true)
+
+makedocs(;
+    modules=[RxNav],
+    authors="William Herrera",
+    sitename="RxNav.jl Documentation",
+    repo=Documenter.Remotes.GitHub("wherrera10", "RxNav.jl"),
+    format=Documenter.HTML(;
+        canonical="https://wherrera10.github.io/RxNav.jl",
+        edit_link="master",
+        assets=String[],
+    ),
+    pages=[
+        "Home" => "index.md",
+        # Add future pages here, e.g., "API Reference" => "api.md"
+    ],
+)
+
+deploydocs(;
+    repo="github.com/wherrera10/RxNav.jl.git",
+    devbranch="master",
+)
+
   
