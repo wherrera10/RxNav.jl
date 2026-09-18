@@ -9,7 +9,7 @@ makedocs(;
     repo=Documenter.Remotes.GitHub("wherrera10", "RxNav.jl"),
     format=Documenter.HTML(;
         canonical="https://wherrera10.github.io/RxNav.jl",
-        edit_link="master",
+        edit_link="main",
         assets=String[],
     ),
     pages=[
