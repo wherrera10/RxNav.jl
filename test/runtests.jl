@@ -1,17 +1,19 @@
 using RxNav
 using Test
 
+# Note: the interactions database was taken offline in 2023, so these are commented out.
+
 @test rcui("ibuprofen") == "5640"
 
 @test contains(first(drugs("naproxen")), "Oral")
 
-@test contains(last(interaction("61148"; ONCHigh = false)).description, "creased")
+#@test contains(last(interaction("61148"; ONCHigh = false)).description, "creased")
 
-@test first(interaction("sumatriptan")).severity == "high"
+#@test first(interaction("sumatriptan")).severity == "high"
 
-@test contains(last(interaction_within_list(["207106", "656659"])).description, "metabolism")
+#@test contains(last(interaction_within_list(["207106", "656659"])).description, "metabolism")
 
-@test last(interaction_within_list(["divalproex", "lamotrigine"])).severity == "N/A" 
+#@test last(interaction_within_list(["divalproex", "lamotrigine"])).severity == "N/A" 
 
 prescribable(true)
 RxNav.getSpellingSuggestions("nortriptelene") == ["nortriptyline"]
