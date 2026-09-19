@@ -19,3 +19,7 @@ prescribable(true)
 RxNav.getSpellingSuggestions("nortriptelene") == ["nortriptyline"]
 prescribable(false)
 RxNav.getSpellingSuggestions("nortriptelene") == ["nortriptyline", "Nortriptylina"]
+
+println("Done")
+true
+
