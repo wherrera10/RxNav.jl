@@ -40,7 +40,8 @@ You may install the package from Github in the usual way, or to install the curr
     Pkg.add("http://github.com/wherrera10/RxNav.jl")
     
 ## Functions Reference
-See also the National Library of Medicine'a API pages at [https://lhncbc.nlm.nih.gov/RxNav/APIs/RxNormAPIs.html].
+
+See also the National Library of Medicine's [RxNorm API documentation](https://lhncbc-portal.lhcaws-prod-pub.nlm.nih.gov/RxNav/APIs/RxNormAPIs.html).
 
 ```@index
 ```
