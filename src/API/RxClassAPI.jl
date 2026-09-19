@@ -316,7 +316,7 @@ end
 /spellingsuggestions    Drug or class names similar to a given string
 """
 function getSpellingSuggestions(term::String, type="")
-    argstring = "/rxclass/spellingsuggestions?term=$term" * isempty(type) ? "" : "&type=$type"
+    argstring = "/rxclass/spellingsuggestions?term=$term" * (isempty(type) ? "" : "&type=$type")
     suggestions = String[]
     try
         doc = getdoc("baseurl", argstring)
