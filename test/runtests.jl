@@ -7,8 +7,6 @@ using Test
 
 @test contains(first(drugs("naproxen")), "Oral")
 
-println("going on to spelling")
-
 #@test contains(last(interaction("61148"; ONCHigh = false)).description, "creased")
 
 #@test first(interaction("sumatriptan")).severity == "high"
@@ -19,6 +17,9 @@ println("going on to spelling")
 
 prescribable(true)
 RxNav.getSpellingSuggestions("nortriptelene") == ["nortriptyline"]
+
+println("spelled with true")
+
 prescribable(false)
 RxNav.getSpellingSuggestions("nortriptelene") == ["nortriptyline", "Nortriptylina"]
 
