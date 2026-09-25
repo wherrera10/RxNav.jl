@@ -42,6 +42,7 @@ You may install the package from Github in the usual way, or to install the curr
 ## Functions Reference
 
 See also the National Library of Medicine's [RxNorm API documentation](https://lhncbc-portal.lhcaws-prod-pub.nlm.nih.gov/RxNav/APIs/RxNormAPIs.html).
+Since RxNav dropped their interactions database in 2023, see also the [RxCheck API documentation](https://rxcheck.dev/docs).
 
 ```@index
 ```
