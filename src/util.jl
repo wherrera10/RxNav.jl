@@ -6,6 +6,7 @@ const URI_DICT = Dict(
     "rxcui" => "https://rxnav.nlm.nih.gov/REST/rxcui?name=",
     "name" => "https://rxnav.nlm.nih.gov/REST/rxcui/",
     "drugs" => "https://rxnav.nlm.nih.gov/REST/drugs?name=",
+    "spell" => "https://rxnav.nlm.nih.gov/REST/spellingsuggestions?name=",
     "interactions" => "https://api.rxcheck.dev/v1/drugs/",
     "interactionpair" => "https://api.rxcheck.dev/v1/interactions?",
     "polypharmacy" => "https://api.rxcheck.dev/v1/interactions/polypharmacy?drugs=",
@@ -65,3 +66,23 @@ so there must be a prior argument in the url string.
 """
 morearg(pairs::Vector) = reduce(*, morearg(a[1], a[2]) for a in pairs)
 morearg(d::Dict) = morearg(collect(d))
+
+"""
+    getSpellingSuggestions
+
+/spellingsuggestions    Drug or class names similar to a given string
+"""
+function getSpellingSuggestions(term::String)
+    suggestions = String[]
+    try
+        doc = getdoc("spell", term)
+        rxn = findall("//suggestionList/suggestion", doc)
+        for x in rxn
+            push!(suggestions, nodecontent(x))
+        end
+    catch y
+        @warn y
+        return nothing
+    end
+    return suggestions
+end
