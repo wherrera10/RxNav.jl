@@ -3,7 +3,8 @@ module RxNav
 
 using HTTP, EzXML, JSON
 
-export rxcui, drugs, name, interaction, interaction_within_list, interact, getSpellingSuggestions
+export rxcui, drugs, name, getSpellingSuggestions
+export ENV_RXCHECK_API_KEY, interaction, interaction_within_list, interact
 
 include("util.jl")
 include("interactions.jl")
