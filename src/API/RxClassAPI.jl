@@ -1,4 +1,4 @@
-#  github: part of RxNav.jl
+#  part of RxNav.jl
 
 """
     findClassByName
@@ -17,6 +17,7 @@ function findClassByName(classname::String, types::Vector{String} = String[])
         end
     catch y
         @warn y
+        return nothing
     end
     return ids
 end
@@ -27,7 +28,7 @@ end
 /class/byId    Drug classes with a specified class identifier
 """
 function findClassesById(classid::String)
-    argstring = "rxclass/class/byId?classZId=" * HTTP.URIs.escapeuri(id)
+    argstring = "rxclass/class/byId?classId=" * HTTP.URIs.escapeuri(classid)
     names = String[]
     try
         doc = getdoc("baseurl", argstring)
@@ -37,6 +38,7 @@ function findClassesById(classid::String)
         end
     catch y
         @warn y
+        return nothing
     end
     return names
 end
@@ -60,6 +62,7 @@ function findSimilarClassesByClass(classid::String, relasource::String, extra=[]
         end
     catch y
         @warn y
+        return nothing
     end
     return similars
 end
@@ -81,6 +84,7 @@ function findSimilarClassesByDrugList(rxcuis::Vector{String}, extra=[])
         end
     catch y
         @warn y
+        return nothing
     end
     return similars
 end
@@ -102,6 +106,7 @@ function getAllClasses(classtypes::Vector{String}=String[])
         end
     catch y
         @warn y
+        return nothing
     end
     return classes
 end
@@ -123,6 +128,7 @@ function getClassByRxNormDrugId(rxcui::String, extras = [])
         end
     catch y
         @warn y
+        return nothing
     end
     return classes
 end
@@ -144,6 +150,7 @@ function getClassByRxNormDrugName(drugname::String, extras = [])
         end
     catch y
         @warn y
+        return nothing
     end
     return classes
 end
@@ -165,6 +172,7 @@ function getClassContexts(classid::String)
         end
     catch y
         @warn y
+        return nothing
     end
     return classes
 end
@@ -187,6 +195,7 @@ function getClassGraphBySource(classId, source="")
         end
     catch y
         @warn y
+        return nothing
     end
     return classes
 end
@@ -209,6 +218,7 @@ function getClassMembers(classid::String, source::String="")
         end
     catch y
         @warn y
+        return nothing
     end
     return drugs
 end
@@ -230,6 +240,7 @@ function getClassTree(classid::String, type="")
         end
     catch y
         @warn y
+        return nothing
     end
     return classes
 end
@@ -248,6 +259,7 @@ function getClassTypes()
         end
     catch y
         @warn y
+        return nothing
     end
     return classtypes
 end
@@ -267,6 +279,7 @@ function getRelas()
         end
     catch y
         @warn y
+        return nothing
     end
     return relas
 end
@@ -289,6 +302,7 @@ function getSimilarityInformation(id1, source1, id2, source2, extras=[])
         end
     catch y
         @warn y
+        return nothing
     end
     return similars
 end
@@ -307,6 +321,7 @@ function getSourcesOfDrugClassRelations()
         end
     catch y
         @warn y
+        return nothing
     end
     return sources
 end
@@ -322,10 +337,11 @@ function getSpellingSuggestions(term::String, type="")
         doc = getdoc("baseurl", argstring)
         rxn = findall("//suggestionList/suggestion", doc)
         for x in rxn
-            push!(suggestions, x)
+            push!(suggestions, nodecontent(x))
         end
     catch y
         @warn y
+        return nothing
     end
     return suggestions
 end
