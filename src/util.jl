@@ -1,33 +1,39 @@
-#  github: part of RxNav.jl
+#  part of RxNav.jl
 
-const PRESCRIBABLE = [false]  # defaults to larger database
-
-prescribable() = PRESCRIBABLE[1]
-
-""" set whether to use Prescribeable RxNorm database or entire database including items no longer available """
-prescribable(tf) = begin PRESCRIBABLE[1] = tf end
-
-""" get the base url for RxNorm, default at loading is the full RxNorm set, not the Prescribable RxNorm set. """
-baseurl() = prescribable() ? "prescribable" : "baseurl"
-
-""" RESTuri is a Dict of RxNav REST urls keyed by strings. """
-const RESTuri = Dict(
+""" URI_DICT is a Dict of RxNav REST or RxCheck v1 urls keyed by strings. """
+const URI_DICT = Dict(
     "baseurl" => "https://rxnav.nlm.nih.gov/REST/",
-    "prescribable" => "https://rxnav.nlm.nih.gov/REST/Prescribe/",
-    "rcui" => "https://rxnav.nlm.nih.gov/REST/rxcui?name=",
+    "rxcui" => "https://rxnav.nlm.nih.gov/REST/rxcui?name=",
+    "name" => "https://rxnav.nlm.nih.gov/REST/rxcui/",
     "drugs" => "https://rxnav.nlm.nih.gov/REST/drugs?name=",
-    "interaction" => "https://rxnav.nlm.nih.gov/REST/interaction/interaction?rxcui=",
-    "interactionlist" => "https://rxnav.nlm.nih.gov/REST/interaction/list?rxcuis=",
+    "interactions" => "https://api.rxcheck.dev/v1/drugs/",
+    "interactionpair" => "https://api.rxcheck.dev/v1/interactions?",
+    "polypharmacy" => "https://api.rxcheck.dev/v1/interactions/polypharmacy?drugs=",
 )
 
 """
-    getdoc(urlkey, urltail)
+    getdoc(urlkey, arg)
 
-get the document found by the string formed by: (the key indexed by urlkey) * (the urltail)
+get the XML document found by the string formed by: RESTuri[urlkey] * (the urltail)
 """
-function getdoc(urlkey, urltail)
-    req = HTTP.request("GET", RESTuri[urlkey] * urltail)
+function getdoc(urlkey, arg)
+    req = HTTP.get(URI_DICT[urlkey] * arg)
     return parsexml(String(req.body)).root
+end
+
+"""
+    getjson(urlkey, urltail, APIKEY = "")
+
+Get the JSON document found by the string formed by: uri, arg.
+Optionally add headers as a vector of Pairs to the request
+"""
+function getjson(urlkey, arg; headers= Pair{String,String}[])
+    if isempty(headers)
+        req = HTTP.get(URI_DICT[urlkey] * arg)
+    else
+        req = HTTP.get(URI_DICT[urlkey] * arg; headers = headers)
+    end
+    return JSON.parse(String(req.body))
 end
 
 """
@@ -38,7 +44,7 @@ Currently rxcui identifiers are composed of only digits 0 through 9,
 though there is nothing in the schema that says these must be only digits.
 If that changes in future RxNav updates, the parsing here may also change.
 """
-is_in_rxcui_format(s) = all(c -> c in "0123456789", collect(s))
+is_in_rxcui_format(s) = all(c -> c in "0123456789", s)
 
 """
     morearg(name, value)
