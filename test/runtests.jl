@@ -17,7 +17,8 @@ end
 
 @testset "Spelling Suggestions" begin
     @test getSpellingSuggestions("nortriptelene") == ["nortriptyline"]
-    @test getSpellingSuggestions("asetaminifen") == ["acetaminophen"]
+    @test getSpellingSuggestions("asetaminiphen") == ["acetaminophen"]
+    @test getSpellingSuggestions("unikorn") == String[]
 end
 
 # Note: the NLM RxNav interactions database was taken offline in 2023
