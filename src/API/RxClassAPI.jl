@@ -325,23 +325,3 @@ function getSourcesOfDrugClassRelations()
     end
     return sources
 end
-
-"""
-    getSpellingSuggestions
-/spellingsuggestions    Drug or class names similar to a given string
-"""
-function getSpellingSuggestions(term::String, type="")
-    argstring = "/rxclass/spellingsuggestions?term=$term" * (isempty(type) ? "" : "&type=$type")
-    suggestions = String[]
-    try
-        doc = getdoc("baseurl", argstring)
-        rxn = findall("//suggestionList/suggestion", doc)
-        for x in rxn
-            push!(suggestions, nodecontent(x))
-        end
-    catch y
-        @warn y
-        return nothing
-    end
-    return suggestions
-end
