@@ -1,4 +1,4 @@
-#  github: part of RxNav.jl
+#  part of RxNav.jl
 
 """
     getAllConcepts
@@ -6,16 +6,17 @@
 /allconcepts	All RxTerms concepts
 """
 function getAllConcepts()
-    clist = Vector{String}[]
+    conlist = Vector{String}[]
     try
         doc = getdoc("baseurl", "RxTerms/allconcepts")
         for x in findall("//minConceptGroup/minConcept", doc)
-            push!(clist, [nodecontent(findfirst(s, x)) for s in ["fullName", "termType", "rxcui"]])
+            push!(conlist, [nodecontent(findfirst(s, x)) for s in ["fullName", "termType", "rxcui"]])
         end
+        return conlist
     catch y
         @warn y
+        return nothing
     end
-    return ndclist
 end
 
 """
@@ -32,7 +33,7 @@ function getAllRxTermInfo(rxcui::String)
         return string(rxn)
     catch y
         @warn y
-        return ""
+        return nothing
     end
 end
 
@@ -49,7 +50,7 @@ function getRxTermDisplayName(rxcui::String)
         return nodecontent(findfirst("displayName", x))
     catch y
         @warn y
-        return ""
+        return nothing
     end
 end
 
@@ -60,11 +61,11 @@ getRxTermsVersion
 """
 function getRxTermsVersion()
     try
-        doc = getdoc("baseurl", "rxTerms/version")
+        doc = getdoc("baseurl", "RxTerms/version")
         return nodecontent(findfirst("//rxTermsVersion", doc))
     catch y
         @warn y
-        return ""
+        return nothing
     end
 end
 
