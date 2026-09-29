@@ -1,23 +1,32 @@
 authors = ["William Herrera <wherrera@alahonua.com>"]
 name = "RxNav"
 uuid = "204b4f30-d656-11eb-06dc-3b971f9bbb52"
-version = "0.1.1"
+version = "0.1.2"
 
 [deps]
+Pkg = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
+Artifacts = "56f22d72-fd6d-98f1-02f0-08ddc0907c33"
 HTTP = "cd3eb016-35fb-5094-929b-558a96fad6f3"
 EzXML = "8f5d6c58-4d21-5cfd-889c-e3ad7ee6a615"
 JSON = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
+Arrow = "69666777-d1a9-59fb-9406-91d4454c9d45"
+DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
+Combinatorics = "861a8166-3701-5b0c-9a16-15d98fcdc6aa"
 
 [extras]
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
-Pkg = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
 Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
 
 [compat]
 julia = "1.10"
+Pkg = "1"
+Artifacts = "1"
 HTTP = "2"
 EzXML = "1"
 JSON = "1"
+Arrow = "2"
+DataFrames = "1"
+Combinatorics = "1"
 
 [targets]
-test = ["Pkg", "Test"]
+test = ["Test"]
