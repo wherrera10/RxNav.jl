@@ -6,7 +6,8 @@
 /class/byName    Drug classes with a specified class name
 """
 function findClassByName(classname::String, types::Vector{String} = String[])
-    argstring = "rxclass/class/byName?className=" * HTTP.URIs.escapeuri(classname) *
+    argstring = "rxclass/class/byName?className=" *
+        HTTP.URIs.escapeuri(classname) *
         (isempty(types) ? "" : "&classTypes=" * join(types, "+"))
     ids = String[]
     try
@@ -48,13 +49,21 @@ end
 
 /class/similar    Classes with similar clinically-significant RxNorm ingredients
 """
-function findSimilarClassesByClass(classid::String, relasource::String, extra=[])
-    argstring = "rxclass/class/similar.xml?classId=" * classid * "&relaSource=" * relasource *
-        isempty(extra) ? "" : morearg(extra)
+function findSimilarClassesByClass(classid::String, relasource::String, extra = [])
+    argstring = "rxclass/class/similar.xml?classId=" *
+        classid *
+        "&relaSource=" *
+        relasource *
+        isempty(extra) ?
+        "" :
+        morearg(extra)
     similars = NamedTuple[]
     try
         doc = getdoc("baseurl", argstring)
-        rxn = findall("//similarityMember/rankClassConcept/drugClassConceptItem/rxclassMinConceptitem", doc)
+        rxn = findall(
+            "//similarityMember/rankClassConcept/drugClassConceptItem/rxclassMinConceptitem",
+            doc,
+        )
         for x in rxn
             ename = nodecontent(findfirst("className", x))
             eid = nodecontent(findfirst("classId", x))
@@ -71,12 +80,19 @@ end
     findSimilarClassesByDrugList
 /class/similarByRxcuis    Classes with clinically-significant RxNorm ingredients similar to a specified list
 """
-function findSimilarClassesByDrugList(rxcuis::Vector{String}, extra=[])
-    argstring = "rxclass/class/similarByRxcuis?rxcuis=" * join(rxcuis, "+") * isempty(extra) ? "" : morearg(extra)
+function findSimilarClassesByDrugList(rxcuis::Vector{String}, extra = [])
+    argstring = "rxclass/class/similarByRxcuis?rxcuis=" *
+        join(rxcuis, "+") *
+        isempty(extra) ?
+        "" :
+        morearg(extra)
     similars = NamedTuple[]
     try
         doc = getdoc("baseurl", argstring)
-        rxn = findall("//similarityMember/rankClassConcept/drugClassConceptItem/rxclassMinConceptItem", doc)
+        rxn = findall(
+            "//similarityMember/rankClassConcept/drugClassConceptItem/rxclassMinConceptItem",
+            doc,
+        )
         for x in rxn
             ename = nodecontent(findfirst("className", x))
             eid = nodecontent(findfirst("classId", x))
@@ -93,8 +109,10 @@ end
     getAllClasses
 /allClasses    All classes (may limit by class type)
 """
-function getAllClasses(classtypes::Vector{String}=String[])
-    argstring = "rxclass/allClasses" * isempty(classtypes) ? "" : "?classTypes=" * join(classtypes, "+")
+function getAllClasses(classtypes::Vector{String} = String[])
+    argstring = "rxclass/allClasses" * isempty(classtypes) ?
+        "" :
+        "?classTypes=" * join(classtypes, "+")
     classes = NamedTuple[]
     try
         doc = getdoc("baseurl", argstring)
@@ -116,7 +134,9 @@ end
 /class/byRxcui    Classes containing a specified drug RXCUI
 """
 function getClassByRxNormDrugId(rxcui::String, extras = [])
-    argstring = "rxclass/class/byRxcui?rxcui=" * rxcui * isempty(extras) ? "" : morearg(extras)
+    argstring = "rxclass/class/byRxcui?rxcui=" * rxcui * isempty(extras) ?
+        "" :
+        morearg(extras)
     classes = NamedTuple[]
     try
         doc = getdoc("baseurl", argstring)
@@ -138,7 +158,9 @@ end
 /class/byDrugName    Classes containing a drug of the specified name
 """
 function getClassByRxNormDrugName(drugname::String, extras = [])
-    argstring = "rxclass/class/byDrugName?drugName=" * drugname * isempty(extras) ? "" : morearg(extras)
+    argstring = "rxclass/class/byDrugName?drugName=" * drugname * isempty(extras) ?
+        "" :
+        morearg(extras)
     classes = NamedTuple[]
     try
         doc = getdoc("baseurl", argstring)
@@ -181,14 +203,16 @@ end
     getClassGraphBySource
 /classGraph    Classes along the path from a specified class to the root of a class hierarchy
 """
-function getClassGraphBySource(classId, source="")
-    argstring = "rxclass/classGraph?classId=" * classid * isempty(source) ? "" : "&source=$source"
+function getClassGraphBySource(classId, source = "")
+    argstring = "rxclass/classGraph?classId=" * classid * isempty(source) ?
+        "" :
+        "&source=$source"
     classes = NamedTuple[]
     try
         doc = getdoc("baseurl", argstring)
         rxn = findall("//rxClassGraph/rxclassMinConceptItem", doc)
         for x in rxn
-            eid =nodecontent(findfirst("classId", x))
+            eid = nodecontent(findfirst("classId", x))
             ename = nodecontent(findfirst("className", x))
             etype = nodecontent(findfirst("classType", x))
             push!(classes, (id = eid, name = ename, type = etype))
@@ -204,7 +228,7 @@ end
     getClassMembers
 /classMembers    Drug members of a specified class
 """
-function getClassMembers(classid::String, source::String="")
+function getClassMembers(classid::String, source::String = "")
     argstring = "/rxclass/classMembers?classId=" * classid * "&relaSource=" * source
     argstring *= isempty(extras) ? "" : morearg(extras)
     drugs = NamedTuple[]
@@ -212,7 +236,7 @@ function getClassMembers(classid::String, source::String="")
         doc = getdoc("baseurl", argstring)
         rxn = findall("//drugMemberGroup/drugMember/minConcept", doc)
         for x in rxn
-            erxcui =nodecontent(findfirst("rxcui", x))
+            erxcui = nodecontent(findfirst("rxcui", x))
             ename = nodecontent(findfirst("name", x))
             push!(drugs, (rxcui = erxcui, name = ename))
         end
@@ -227,8 +251,10 @@ end
     getClassTree
 /classTree    Subclasses or descendants of the specified class
 """
-function getClassTree(classid::String, type="")
-    argstring = "/rxclass/classTree?classId=" * classid * isempty(type) ? "" : "&classType=$type"
+function getClassTree(classid::String, type = "")
+    argstring = "/rxclass/classTree?classId=" * classid * isempty(type) ?
+        "" :
+        "&classType=$type"
     classes = NamedTuple[]
     try
         doc = getdoc("baseurl", argstring)
@@ -288,8 +314,8 @@ end
     getSimilarityInformation
 /class/similarInfo    Similarity of the clinically-significant membership of two classes
 """
-function getSimilarityInformation(id1, source1, id2, source2, extras=[])
-    argstring = "rxclass/class/similarInfo?classId1=$id1&relaSource1=$source1&classId2=$id2&relaSource2=source2"
+function getSimilarityInformation(id1, source1, id2, source2, extras = [])
+    argstring = "rxclass/class/similarInfo?classId1=$id1&relaSource1=$source1&classId2=$id2&relaSource2=$source2"
     argstring *= isempty(extras) ? "" : morearg(extras)
     similars = NamedTuple[]
     try
