@@ -21,27 +21,16 @@ end
     @test getSpellingSuggestions("unikorn") == String[]
 end
 
-# Note: the NLM RxNav interactions database was taken offline in 2023
-# The database at RxCheck.dev is now used for interactions.
-# The  RxCheck API key should be placed in ENV as "RXCHECK_API_KEY" => "rxck_live_your_key_here"
-# The testing first checks for the API key (as assigned by RxNav.jl to ENV_RXCHECK_API_KEY)
-# and runs the testset below if found, but otherwise skips this testset.
-if !isempty(ENV_RXCHECK_API_KEY)
-    @testset "Interactions Tests" begin
-        @test contains(last(interaction("61148"; ONCHigh = false)).description, "creased")
-        @test first(interaction("sumatriptan")).severity == "high"
-        @test contains(
-            last(interaction_within_list(["207106", "656659"])).description, "metabolism",
-        )
-        @test last(interaction_within_list(["divalproex", "lamotrigine"])).severity == "N/A"
-    end
-else
-    @info """
-    ENV["RXCHECK_API_KEY"] not found. Interactions function tests are being skipped.
-    To enable interaction functions, set the RXCHECK_API_KEY environment variable.
-    Example: export RXCHECK_API_KEY='your_api_key_here'
-    An API key for the interactions may be obtained from the RxCheck.dev website.
-    """
+@testset "Interactions Tests" begin
+    @test any(t -> t.drug2 == "Cefuroxime", interactions("612"))
+    @test contains(
+        first(interactions("INSULIN", "PROPRANOLOL")).description,
+        "self-monitoring of blood glucose",
+    )
+    @test length(interactions(["fluconazole", "PROGESTERONE", "haloperidol"])) == 3
+    inters = interactions("10689", "7052", "7804", "3288")
+    @test length(inters) == 6
+    @test all(t -> startswith(t.source, "DrugBank"), inters)
 end
 
 true
