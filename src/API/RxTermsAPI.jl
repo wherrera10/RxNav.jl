@@ -68,4 +68,3 @@ function getRxTermsVersion()
         return nothing
     end
 end
-
