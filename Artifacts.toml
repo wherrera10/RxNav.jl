@@ -1,0 +1,6 @@
+[pddi_interactions]
+git-tree-sha1 = "04a252b9ae13783efa5924f0722981f3ebc0b5be"
+
+    [[pddi_interactions.download]]
+    url = "https://github.com/wherrera10/RxNav.jl/releases/download/v0.1.2/pddi_interactions.arrow.tar.gz"
+    sha256 = "43c8ba5c84201900256d92fd6464e11aa2d0b489ae8931889288ae34b4fd459d"
