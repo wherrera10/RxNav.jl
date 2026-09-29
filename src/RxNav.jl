@@ -1,10 +1,10 @@
 """ RxNav National Library of Medicine REST API wrapper in Julia. """
 module RxNav
 
-using Artifacts, HTTP, EzXML, JSON, DataFrames, Arrow, Combinatorics
+using Artifacts, Pkg, HTTP, EzXML, JSON, DataFrames, Arrow, Combinatorics
 
 export rxcui, drugs, name, getSpellingSuggestions
-export ENV_RXCHECK_API_KEY, interaction, interaction_within_list, interact
+export ENV_RXCHECK_API_KEY, interactions
 
 include("util.jl")
 include("interactions.jl")
