@@ -55,18 +55,20 @@ Take a name of a drug as String argument, return its RxCUI as String.
 
 Given a drug name, return a list of all available dosing forms of the drug.
 
-####    interact(list::Vector)
-####    interact(s1::String, severeonly::Bool=true)
-####    interact(s1::String, s2::String, args...)
+####    name(id)
 
-Get a list of interactions for a single drug (or rxcui drug id) or pairwise interactions for more than one drug (or rxcuid).
+Given an RxCUI id, return the drug name.
 
-####    interaction(id; ONCHigh = true)
+####    interact(s1::AbstractString, severeonly::Bool = false)
+####    interact(s1::AbstractString, s2::AbstractString, severeonly::Bool = false)
+####    interact(list::Vector{<:AbstractString}, severeonly::Bool = false)
+
+Get a list of interactions for a single drug (or rxcui drug id), two different drugs, or pairwise interactions for more than one drug (or rxcuid).
+
+####    interaction(id; severeonly = false)
     
 Given a drug name or rxcui id string, return known drug interations for that drug.
-If ONCHigh is true only return the ONCHigh database entries, which returns fewer
-entries, tending to list only the more significant interactions. Set ONCHigh
-to false to get all known interactions, which can be multiple and sometimes redundant.
+If severeonly is true only return entries marked as serious or those in the ONCHigh database.
 Returns a `Vector` of `NamedTuple`s as in (drug1, drug2, severity, description).
 
 ####    interaction_within_list(idlist::Vector{String})
@@ -78,16 +80,6 @@ Returns a `Vector` of `NamedTuple`s as in (drug1, drug2, severity, description)
 
 
 ## API functions
-
-Note: There are two different RxNorm databases.  The more complete one, RxNorm, contains
-medications including veterinary-use-only medications and medications no longer in use or
-which are not available in United States pharmacies. The Julia functions default to this
-database. In order to confine search results to generally available human medications,
-the RxNorm database also supports the "Prescribable" RxNorm API, which gives results only
-within medications currently available for medical prescription in the US. If you want the
-"Prescribable" database used for your RxNorm API calls, you should first call the function 
-''prescribable(true)'' after which all calls to the RxNorm API will use the somewhat smaller
-Prescribable database. To reset, call `prescribable(false)`.
 
 Some of the API functions take optional arguments. For details of the values for such arguments 
 you should consult the NLM documentation (links are below). If the function takes an optional argument
