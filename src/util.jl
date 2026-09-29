@@ -7,9 +7,6 @@ const URI_DICT = Dict(
     "name" => "https://rxnav.nlm.nih.gov/REST/rxcui/",
     "drugs" => "https://rxnav.nlm.nih.gov/REST/drugs?name=",
     "spell" => "https://rxnav.nlm.nih.gov/REST/spellingsuggestions?name=",
-    "interactions" => "https://api.rxcheck.dev/v1/drugs/",
-    "interactionpair" => "https://api.rxcheck.dev/v1/interactions?",
-    "polypharmacy" => "https://api.rxcheck.dev/v1/interactions/polypharmacy?drugs=",
 )
 
 """
