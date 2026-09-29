@@ -27,18 +27,25 @@ Julia interface to the National Library of Medicine's online pharmaceutical RxNa
     julia> println(RxNav.getSpellingSuggestions("nortriptelene"))
     ["nortriptyline"]
     
-    julia> interact("1191", "warfarin", "vitamin K")
-    3-element Vector{NamedTuple}:
-     (drug1 = "aspirin", drug2 = "vitamin K", severity = "N/A", description = "Acetylsalicylic acid may decrease the excretion rate of Phylloquinone which could result in a higher serum level.")
-     (drug1 = "aspirin", drug2 = "warfarin", severity = "N/A", description = "Acetylsalicylic acid may increase the anticoagulant activities of Warfarin.")
-     (drug1 = "vitamin K", drug2 = "warfarin", severity = "N/A", description = "The therapeutic efficacy of Warfarin can be decreased when used in combination with Phylloquinone.")
+    julia> interactions("diazepam")
+    430-element Vector{NamedTuple}:
+     (drug1 = "Sedative Medications", drug2 = "Diazepam", is_severe = false, description = "ASDEC - APEC Association not recommended: - with sodium oxybate.", source = "FrenchDDI,    translated, originally via Github")
+     (drug1 = "Diazepam", drug2 = "Diazepam", is_severe = false, description = "Precaution for use: Warn patients of the increased risk when driving a car or operating machinery.", source = "FrenchDDI, translated, originally via Github")
+     (drug1 = "Morphinics", drug2 = "Diazepam", is_severe = false, description = "To be taken into account: Increased risk of respiratory depression, which can be fatal in", source = "FrenchDDI, translated, originally via Github")
+     (drug1 = "Alcohol (Beverage Or Excipient)", drug2 = "Diazepam", is_severe = true, description = "Association NOT RECOMMENDED Avoid consuming alcoholic beverages and medications containing alcohol.", source = "FrenchDDI, translated, originally via Github")
+     (drug1 = "Diazepam", drug2 = "Diazepam", is_severe = false, description = "To be taken into account: Risk of increased side effects of buspirone.", source = "FrenchDDI, translated, originally via Github")
+     (drug1 = "Clozapine", drug2 = "Diazepam", is_severe = false, description = "To be taken into account: Increased risk of collapse with respiratory and/or cardiac arrest.", source = "FrenchDDI, translated, originally via Github")
+     ...
+    
+    julia> interactions("progesterone", "erythromycin", "morphine", "ibuprofen")
+    2-element Vector{NamedTuple}:
+     (drug1 = "Progesterone", drug2 = "Erythromycin", is_severe = "not given", description = "The metabolism of Erythromycin can be decreased when combined with Progesterone.", source = "DrugBank via Kaggle")
+     (drug1 = "Morphine", drug2 = "Erythromycin", is_severe = "not given", description = "The metabolism of Erythromycin can be decreased when combined with Morphine.", source = "DrugBank via Kaggle")
     
     julia> filter(x -> occursin("Pediatric", x), drugs("riboflavin"))
-    2-element Vector{String}:
-     "alpha-tocopherol acetate 1.4 MG/ML / ascorbic acid 16 MG/ML / biotin 0.004 MG/ML / dexpanthenol 1 MG/ML / ergocalciferol 0.002 MG/ML / folic acid 0.028 MG/ML / niacinamide 3.4 MG/ML / pyridoxine hydrochloride 0.2 MG/ML / riboflavin 0.28 MG/ML / thiamine hydrochloride 0.24 MG/ML / vitamin A 0.14 MG/ML / vitamin B12 0.0002 MG/ML / vitamin K1 0.04 MG/ML Injectable Solution [MVI Pediatric]"
-     "alpha-tocopherol acetate 1.4 UNT/ML / ascorbic acid 16 MG/ML / biotin 0.004 MG/ML / cholecalciferol 80 UNT/ML / dexpanthenol 1 MG/ML / folic acid 0.028 MG/ML / niacinamide 3.4 MG/ML / pyridoxine hydrochloride 0.2 MG/ML / riboflavin 0.28 MG/ML / thiamine hydrochloride 0.24 MG/ML / vitamin A palmitate 460 UNT/ML / vitamin B12 0.0002 MG/ML / vitamin K1 0.04 MG/ML Injectable Solution [Infuvite Pediatric]"
-    
-
+    1-element Vector{String}:
+     "alpha-tocopherol acetate 1.4 UN" ⋯ 342 bytes ⋯ " Solution [Infuvite Pediatric]"
+        
 
 ## General Use Functions
 
