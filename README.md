@@ -66,25 +66,23 @@ Given a drug name, return a list of all available dosing forms of the drug.
 
 Given an RxCUI id, return the drug name.
 
-####    interact(s1::AbstractString, severeonly::Bool = false)
-####    interact(s1::AbstractString, s2::AbstractString, severeonly::Bool = false)
-####    interact(list::Vector{<:AbstractString}, severeonly::Bool = false)
-
-Get a list of interactions for a single drug (or rxcui drug id), two different drugs, or pairwise interactions for more than one drug (or rxcuid).
-
-####    interaction(id; severeonly = false)
+####    interactions(id; severeonly::Bool = false)
     
 Given a drug name or rxcui id string, return known drug interations for that drug.
-If severeonly is true only return entries marked as serious or those in the ONCHigh database.
+If severeonly is true only return entries marked as serious such as those in the ONCHigh database.
 Returns a `Vector` of `NamedTuple`s as in (drug1, drug2, severity, description).
 
-####    interaction_within_list(idlist::Vector{String})
+####    interactions(s1::AbstractString, s2::AbstractString; severeonly::Bool = false)
+Given a two drug names or rxcui id strings, return known drug interations for those drugs.
+If severeonly is true only return entries marked as serious such as those in the ONCHigh database.
+Returns a `Vector` of `NamedTuple`s as in (drug1, drug2, severity, description).
+
+####    interactions(idlist::Vector{String}; severeonly = false)
 
 Given a list of drug names or rxcui id strings, return known drug interations for 
 that combination of drugs. Results are organized pairwise, so if A, B, and C have
 mutual interactions this will be reported for example as A with B, A with C, B with C.
 Returns a `Vector` of `NamedTuple`s as in (drug1, drug2, severity, description)
-
 
 ## API functions
 
@@ -96,7 +94,8 @@ values for that key as either a string or a vector of strings to be assigned to 
 final URL request. For example, `extra = Dict("sources" => ["ACTIVE", "OBSOLETE"], "toReturn" => 25)`
 would be translated to `"&sources=ACTIVE+OBSOLETE&toReturn=25"` in the REST call request string sent by HTTP.
 
-The list of API functions is extensive. The API function names are not exported from RxNav, so to call,
-for example, `getSpellingSuggestions("asprin")` you must call this as `RxNav.getSpellingSuggestions("asprin")`.
+The list of API functions is extensive. The long API function names are not exported from RxNav, so to call,
+for example, `getSourcesOfDrugClassRelations()` you must call this as `RxNav.getSourcesOfDrugClassRelations()`.
+
 
 ### More documentation is at https://wherrera10.github.io/RxNav.jl/
