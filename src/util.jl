@@ -16,7 +16,7 @@ get the XML document found by the string formed by: RESTuri[urlkey] * (the urlta
 """
 function getdoc(urlkey, arg)
     req = HTTP.get(URI_DICT[urlkey] * arg)
-    return parsexml(String(req.body)).root
+    return parsexml(String(copy(req.body))).root
 end
 
 """
