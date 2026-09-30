@@ -92,8 +92,7 @@ function interactions(arr::Vector{<:AbstractString}; severeonly::Bool = false)
     return reduce(
         vcat,
         (interactions(combo[1], combo[2]; severeonly = severeonly) for combo in combos)
-    ) |>
-        unique!
+    ) |> unique! |> sort!
 end
 """ Convenience function for interaction queries with arbitrary number of arguments """
 function interactions(args::AbstractString...; severeonly::Bool = false)
