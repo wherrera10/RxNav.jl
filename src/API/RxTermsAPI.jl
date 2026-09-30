@@ -46,8 +46,8 @@ function getRxTermDisplayName(rxcui::String)
     argstring = "RxTerms/rxcui/" * rxcui * "/name"
     try
         doc = getdoc("baseurl", argstring)
-        x = findfirst("//displayGroup", doc)
-        return nodecontent(findfirst("displayName", x))
+        x = findfirst("//displayGroup/displayName", doc)
+        return x.content
     catch y
         @warn y
         return nothing
@@ -62,7 +62,7 @@ getRxTermsVersion
 function getRxTermsVersion()
     try
         doc = getdoc("baseurl", "RxTerms/version")
-        return nodecontent(findfirst("//rxTermsVersion", doc))
+        return findfirst("//rxtermsVersion", doc).content
     catch y
         @warn y
         return nothing
