@@ -1,19 +1,27 @@
 #  part of RxNav.jl
 
 """
-   filterByProperty
+    filterByProperty
+
 /rxcui/rxcui/filter	Concept RXCUI if the predicate is true	Active
 Return true if the concept RXCUI satisfies the specified property and property values.
 Return false if it does not fit specified properties, nothing if error occurs.
 """
-function filterByProperty(rxcui::String, propName::String, propValues::Vector{String} = String[])
-    argstring = "$rxcui/filter?propName=$propName"
+function filterByProperty(
+    rxcui::AbstractString,
+    propName = "TTY",
+    propValues = ["IN", "PIN"],
+)
+    id = is_in_rxcui_format(rxcui) ? rxcui : rxcui(rxcui)
+    isnothing(id) && return nothing
+    argstring = "rxcui/$id/filter?propName=$propName"
     if !isempty(propValues)
-        argstring *= HTTP.URIs.escapeuri("&propValues=" * join(propValues, "+"))
+        argstring *= "&propValues=" * join(propValues, "+")
     end
     try
-        s = string(getdoc("baseurl", argstring))
-        return contains(rxcui, s)
+        doc = getdoc("baseurl", argstring)
+        rxc = findfirst("//rxcui", doc)
+        return !isnothing(rxc) && id == nodecontent(rxc)
     catch y
         @warn y
         return nothing
@@ -24,7 +32,7 @@ end
    findRxcuiById
 /rxcui?idtype=...&id=...	Concepts associated with a specified identifier	Active or Current
 """
-function findRxcuiById(idtype::String, id::String, allsrc = 0)
+function findRxcuiById(idtype::AbstractString, id::AbstractString, allsrc = 0)
     argstring = "rxcui?idtype=$idtype&id=$id&allsrc=$allsrc"
     try
         doc = getdoc("baseurl", argstring)
@@ -40,7 +48,7 @@ end
    findRxcuiByString
 /rxcui?name=...	Concepts with a specified name	Active or Current
 """
-function findRxcuiByString(name::String, extras=[])
+function findRxcuiByString(name::AbstractString, extras = [])
     argstring = "rxcui?name=" * HTTP.URIs.escapeuri(name)
     argstring *= isempty(extras) ? "" : morearg(extras)
     try
@@ -70,7 +78,7 @@ function getAllConceptsByStatus(status = "ALL")
         return concepts
     catch y
         @warn y
-        return nothing      
+        return nothing
     end
 end
 
@@ -79,7 +87,7 @@ end
 
 /allconcepts	Concepts having a specified term type	Active
 """
-function getAllConceptsByTTY(tty::Vector{String})
+function getAllConceptsByTTY(tty::Vector{<:AbstractString})
     argstring = "allconcepts?tty=" * join(tty, "+")
     concepts = NamedTuple[]
     try
@@ -102,17 +110,31 @@ end
 
 /rxcui/rxcui/allhistoricalndcs	National Drug Codes (NDC) ever associated with a concept	Current and Historical
 """
-function getAllHistoricalNDCs()
-    argstring = "rxcui/1668240/allhistoricalndcs"
+function getAllHistoricalNDCs(concept::AbstractString)
+    isempty(concept) && return nothing
+    id = is_in_rxcui_format(concept) ? concept : rxcui(concept)
+    isnothing(id) && return nothing
+    argstring = "rxcui/$id/allhistoricalndcs"
     times = NamedTuple[]
     try
         doc = getdoc("baseurl", argstring)
-        rxn = findall("//historicalNdcConcept/ndcTime", doc)
+        rxn = findall("//historicalNdcConcept/historicalNdcTime/ndcTime", doc)
+        isempty(rxn) && return nothing
         for x in rxn
-            endc = nodecontent(findfirst("ndc", x))
-            estartDate = nodecontent(findfirst("startDate", x))
-            eendDate = nodecontent(findfirst("endDate", x))
-            push!(times, (ndc = endc, startDate = estartDate, endDate = eendDate))
+            endc = findfirst("ndc", x)
+            isnothing(endc) && return nothing
+            estartdate = findfirst("startDate", x)
+            isnothing(estartdate) && return nothing
+            eenddate = findfirst("endDate", x)
+            isnothing(eenddate) && return nothing
+            push!(
+                times,
+                (
+                    ndc = nodecontent(endc),
+                    startDate = nodecontent(estartdate),
+                    endDate = nodecontent(eenddate),
+                ),
+            )
         end
     catch y
         @warn y
@@ -132,7 +154,7 @@ function getAllNDCsByStatus(status = "ALL")
     try
         doc = getdoc("baseurl", argstring)
         for x in findall("//ndcList/ndc", doc)
-            push!(ndclist, content(x))
+            push!(ndclist, x.content)
         end
     catch y
         @warn y
@@ -146,9 +168,8 @@ end
 
 /rxcui/rxcui/allProperties	Concept details	Active
 """
-function getAllProperties(rxcui, properties = ["ALL"])
+function getAllProperties(rxcui::AbstractString, properties = ["names", "codes"])
     argstring = "rxcui/" * rxcui * "/allProperties?prop=" * join(properties, "+")
-    query = RESTuri["baseurl"] * argstring
     concepts = NamedTuple[]
     try
         doc = getdoc("baseurl", argstring)
@@ -171,7 +192,7 @@ end
 
 /rxcui/rxcui/allrelated	Concepts related directly or indirectly to a specified concept	Active
 """
-function getAllRelatedInfo(rxcui::String)
+function getAllRelatedInfo(rxcui::AbstractString)
     argstring = "rxcui/" * rxcui * "/allrelated"
     concepts = NamedTuple[]
     try
@@ -184,7 +205,7 @@ function getAllRelatedInfo(rxcui::String)
         end
     catch y
         @warn y
-        return nothing  
+        return nothing
     end
     return concepts
 end
@@ -194,15 +215,15 @@ end
 
 /approximateTerm	Concept and atom IDs approximately matching a query	Active or Current
 """
-function getApproximateMatch(term::String, extras = [])
-    argstring = "approximateTerm?term=" * HTTP.URIs.escapeuri(term) * isempty(extras) ? "" : morearg(extras)
+function getApproximateMatch(term::AbstractString, extras = String[])
+    argstring = "approximateTerm?term=" * term * (isempty(extras) ? "" : morearg(extras))
     concepts = NamedTuple[]
     try
         doc = getdoc("baseurl", argstring)
         rxn = findall("//approximateGroup/candidate", doc)
         for x in rxn
-            erxcui = nodecontent(findfirst("rxcui", x))
-            erxaui = nodecontent(findfirst("rxaui", x))
+            erxcui = findfirst("rxcui", x).content
+            erxaui = findfirst("rxaui", x).content
             push!(concepts, (rxcui = erxcui, rxaui = erxaui))
         end
     catch y
@@ -237,7 +258,7 @@ end
 
 /drugs	Drugs related to a specified name	Active
 """
-function getDrugs(name::String)
+function getDrugs(name::AbstractString)
     argstring = "drugs?name=" * HTTP.URIs.escapeuri(name)
     concepts = NamedTuple[]
     try
@@ -280,16 +301,22 @@ end
 
 /brands	Brands containing specified ingredients	Active
 """
-function getMultiIngredBrand(ingredientids::Vector{String})
-    argstring = "brands?ingredientids=" * join(ingredientids, "+")
+function getMultiIngredBrand(ingredientids::Vector{<:AbstractString})
+    ids = map(s -> is_in_rxcui_format(s) ? s : rxcui(s), ingredientids)
+    filter!(x -> !isnothing(x), ids)
+    isempty(ids) && return nothing
+    argstring = "brands?ingredientids=" * join(ids, "+")
     concepts = NamedTuple[]
     try
         doc = getdoc("baseurl", argstring)
         rxn = findall("//brandGroup/conceptProperties", doc)
+        isempty(rxn) && return nothing
         for x in rxn
-            erxcui = nodecontent(findfirst("rxcui", x))
-            ename = nodecontent(findfirst("propName", x))
-            push!(concepts, (rxcui = erxcui, name = ename))
+            erxcui = findfirst("rxcui", x)
+            isnothing(erxcui) && return nothing
+            ename = findfirst("name", x)
+            isnothing(ename) && return nothing
+            push!(concepts, (rxcui = nodecontent(erxcui), name = nodecontent(ename)))
         end
     catch y
         @warn y
@@ -303,12 +330,15 @@ end
 
 /ndcproperties	National Drug Code (NDC) details	Active
 """
-function getNDCProperties(value::String)
+function getNDCProperties(value::AbstractString)
     argstring = "ndcproperties?id=" * HTTP.URIs.escapeuri(value)
     concepts = NamedTuple[]
     try
         doc = getdoc("baseurl", argstring)
-        rxn = findall("//ndcPropertyList/ndcProperty/properttyConceptList/propertyConcept", doc)
+        rxn = findall(
+            "//ndcPropertyList/ndcProperty/propertyConceptList/propertyConcept",
+            doc,
+        )
         for x in rxn
             propname = nodecontent(findfirst("propName", x))
             propvalue = nodecontent(findfirst("propValue", x))
@@ -326,8 +356,10 @@ end
 
 /ndcstatus	Status of a National Drug Code (NDC)	Current and Historical
 """
-function getNDCStatus(ndc::String, extras = [])
-    argstring = "ndcstatus?ndc=" * HTTP.URIs.escapeuri(ndc) * (isempty(extras) ? "" : morearg(extras))
+function getNDCStatus(ndc::AbstractString, extras = [])
+    argstring = "ndcstatus?ndc=" *
+        HTTP.URIs.escapeuri(ndc) *
+        (isempty(extras) ? "" : morearg(extras))
     concepts = NamedTuple[]
     try
         doc = getdoc("baseurl", argstring)
@@ -337,7 +369,15 @@ function getNDCStatus(ndc::String, extras = [])
             originalRx = nodecontent(findfirst("originalRxcui", x))
             startDate = nodecontent(findfirst("startDate", x))
             endDate = nodecontent(findfirst("endDate", x))
-            push!(concepts, (active = activeRx, original = originalRx, startdate = startDate, enddate = endDate))
+            push!(
+                concepts,
+                (
+                    active = activeRx,
+                    original = originalRx,
+                    startdate = startDate,
+                    enddate = endDate,
+                ),
+            )
         end
     catch y
         @warn y
@@ -347,18 +387,18 @@ function getNDCStatus(ndc::String, extras = [])
 end
 
 """
-getNDCs
+    getNDCs
 
 /rxcui/rxcui/ndcs	National Drug Codes (NDC) associated with a concept	Active
 """
-function getNDCs(rxcui::String)
+function getNDCs(rxcui::AbstractString)
     argstring = "rxcui/" * rxcui * "/ndcs"
     ndcs = String[]
     try
         doc = getdoc("baseurl", argstring)
-        rxn = findall("//ndcGroup/ndcList/ndc", doc)
-        for ndc in rxn
-            push!(ndcs, nodecontent(ndc))
+        list = findall("//ndcGroup/ndcList/ndc", doc)
+        for ndc in list
+            push!(ndcs, ndc.content)
         end
     catch y
         @warn y
@@ -412,8 +452,10 @@ end
 
 /rxcui/rxcui/proprietary	Strings from sources that require a UMLS license	Current
 """
-function getProprietaryInformation(rxcui::String, ticket::String, extras = [])
-    argstring = "rxcui/" * rxcui * "/proprietary.xml?ticket=$ticket" * isempty(extras) ? "" : morearg(extras)
+function getProprietaryInformation(rxcui, ticket, extras = [])
+    argstring = "rxcui/" * rxcui * "/proprietary.xml?ticket=$ticket" * isempty(extras) ?
+        "" :
+        morearg(extras)
     concepts = NamedTuple[]
     try
         doc = getdoc("baseurl", argstring)
@@ -439,7 +481,7 @@ function getRelaTypes()
     relas = String[]
     try
         doc = getdoc("baseurl", "relatypes")
-        rxn = findall("//relationalTypeList/relationType", doc)
+        rxn = findall("//relationTypeList/relationType", doc)
         for rel in rxn
             push!(relas, nodecontent(rel))
         end
@@ -454,7 +496,10 @@ end
 
 /rxcui/rxcui/related?rela=...	Concepts directly related to a specified concept by a specified relationship	Active
 """
-function getRelatedByRelationship(rxcui::String, relata::Vector{String})
+function getRelatedByRelationship(
+    rxcui,
+    relata = ["tradename_of", "has_precise_ingredient"],
+)
     argstring = "rxcui/" * rxcui * "/related?rela=" * join(relata, "+")
     concepts = NamedTuple[]
     try
@@ -476,16 +521,17 @@ end
 
 /rxcui/rxcui/related?tty=...	Concepts of specified types that are directly or indirectly related to a specified concept	Active
 """
-function getRelatedByType(rxcui::String, ttys::Vector{String})
+function getRelatedByType(rxcui::String, ttys::Vector{String} = ["SBD", "SBDF"])
     argstring = "rxcui/" * rxcui * "/related?tty=" * join(ttys, "+")
     concepts = NamedTuple[]
     try
         doc = getdoc("baseurl", argstring)
         rxn = findall("//relatedGroup/conceptGroup/conceptProperties", doc)
         for x in rxn
-            erxcui = nodecontent(findfirst("rxcui", x))
-            ename = nodecontent(findfirst("name", x))
-            push!(concepts, (rxcui = erxcui, name = ename))
+            erxcui = findfirst("rxcui", x).content
+            ename = findfirst("name", x).content
+            synonym = findfirst("synonym", x).content
+            push!(concepts, (rxcui = erxcui, name = ename, synonym = synonym))
         end
     catch y
         @warn y
@@ -500,15 +546,25 @@ end
 /rxcui/rxcui/properties	Concept name, TTY, and a synonym	Active
 """
 function getRxConceptProperties(rxcui::String)
-    argstring = "rxcui/" * rxcui * "/properties"
+    argstring = "Prescribe/rxcui/" * rxcui * "/properties"
     try
         doc = getdoc("baseurl", argstring)
-        x = findfirst("properties")
-        ename = nodecontent(findfirst("name", x))
-        etty = nodecontent(findfirst("tty", x))
-        elanguage = nodecontent(findfirst("language", x))
-        esuppress = nodecontent(findfirst("suppress", x))
-        return (name = ename, tty = etty, language = elanguage, suppress = esuppress)
+        x = findfirst("properties", doc)
+        isnothing(x) && return nothing
+        ename = findfirst("name", x)
+        isnothing(ename) && return nothing
+        etty = findfirst("tty", x)
+        isnothing(etty) && return nothing
+        elanguage = findfirst("language", x)
+        isnothing(elanguage) && return nothing
+        esuppress = findfirst("suppress", x)
+        supcontent = isnothing(esuppress) ? nothing : nodecontent(esuppress)
+        return (
+            name = nodecontent(ename),
+            tty = nodecontent(etty),
+            language = nodecontent(elanguage),
+            suppress = supcontent,
+        )
     catch y
         @warn y
         return nothing
@@ -521,12 +577,14 @@ end
 /rxcui/rxcui	Name of a concept	Active
 """
 function getRxNormName(rxcui::String)
+    argstring = "Prescribe/rxcui/" * rxcui
     try
-        doc = getdoc("baseurl", rxcui)
+        doc = getdoc("baseurl", argstring)
         x = findfirst("//idGroup", doc)
-        eid = nodecontent(findfirst("rxnormId", x))
-        ename = nodecontent(findfirst("name", x))
-        return (rxnormId = eid, name = ename)
+        isnothing(x) && return nothing
+        ename = findfirst("name", x)
+        isnothing(ename) && return nothing
+        return (rxnormId = rxcui, name = nodecontent(ename))
     catch y
         @warn y
         return nothing
@@ -541,9 +599,8 @@ end
 function getRxNormVersion()
     try
         doc = getdoc("baseurl", "version")
-        x = root(doc)
-        ver = nodecontent(findfirst("version", x))
-        apiver = nodecontent(findfirst("name", x))
+        ver = findfirst("version", doc).content
+        apiver = findfirst("apiVersion", doc).content
         return (version = ver, apiVersion = apiver)
     catch y
         @warn y
@@ -564,8 +621,7 @@ function getRxProperty(rxcui::String, propname::String)
         cat = nodecontent(findfirst("propCategory", x))
         ename = nodecontent(findfirst("propName", x))
         val = nodecontent(findfirst("propValue", x))
-        esuppress = nodecontent(findfirst("suppress", x))
-        return (category = cat, name = ename, value = val, suppress = esuppress)
+        return (category = cat, name = ename, value = val)
     catch y
         @warn y
         return nothing
