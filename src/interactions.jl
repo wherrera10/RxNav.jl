@@ -13,7 +13,7 @@ const DF = DataFrame(Arrow.Table(PDDI_FILE))
 Get a list of interactions for a pair of drugs, a single drug, or pairwise from a list
 of drug names (or rxcui drug ids). Since RxNav no longer maintains an interactions
 database, this function uses a custom Arrow database. For details about the database
-construction used, check the src/arrow/csv subdirectory and its contents.
+construction used, see the repository at https://github.com/wherrera10/PDDI_InteractionFiles.jl.
 
 Returns a list of NamedTuples representing the interactions. Each NamedTuple contains the following fields:
 - `drug1`: The name of the first drug.
