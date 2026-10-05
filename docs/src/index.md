@@ -16,10 +16,7 @@ Julia interface to the National Library of Medicine's online pharmaceutical RxNa
     Narcotic analgesics - monoamine oxidase (MAO) inhibitors
     
     julia> println(RxNav.getSpellingSuggestions("nortriptelene"))
-    ["nortriptyline", "Nortriptylina"]
-    
-    julia> RxNav.prescribable(true)
-    true
+    ["nortriptyline"]
     
     julia> println(RxNav.getSpellingSuggestions("nortriptelene"))
     ["nortriptyline"]
