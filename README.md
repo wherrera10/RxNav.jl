@@ -19,10 +19,7 @@ Julia interface to the National Library of Medicine's online pharmaceutical RxNa
     Narcotic analgesics - monoamine oxidase (MAO) inhibitors
     
     julia> println(RxNav.getSpellingSuggestions("nortriptelene"))
-    ["nortriptyline", "Nortriptylina"]
-    
-    julia> RxNav.prescribable(true)
-    true
+    ["nortriptyline"]
     
     julia> println(RxNav.getSpellingSuggestions("nortriptelene"))
     ["nortriptyline"]
@@ -54,7 +51,7 @@ for ease of use. For example, the functions may take either a drug name or an Rx
 identifier as argument.
 
 
-####    rcui(name)
+####    rxcui(name)
 
 Take a name of a drug as String argument, return its RxCUI as String.
 
